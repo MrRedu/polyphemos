@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 
 export default function HomePage() {
   return (
@@ -6,5 +6,5 @@ export default function HomePage() {
       <h1>HomePage</h1>
       <Button className="cursor-pointer">Épale</Button>
     </>
-  );
+  )
 }

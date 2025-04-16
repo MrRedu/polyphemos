@@ -1,0 +1,2 @@
+echo "🔄 Ejecutando lint, type-check y format antes del push..."
+npm run lint && npm run type-check && npm run format

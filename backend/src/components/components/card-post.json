@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_components_card_posts",
+  "info": {
+    "displayName": "Card Post"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string",
+      "required": false
+    },
+    "published": {
+      "type": "date"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

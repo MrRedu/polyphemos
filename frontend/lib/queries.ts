@@ -10,13 +10,36 @@ export const QUERY_HOME_PAGE = {
 export const QUERY_BLOG_PAGE = {
   populate: {
     fields: ['title', 'description'],
-    articles: {
-      populate: {
-        fields: ['title', 'summary', 'published', 'author', 'tags', 'label'],
-        multimedia: {
-          fields: ['url', 'name', 'alternativeText', 'width', 'height'],
-        },
-      },
+  },
+};
+
+export const QUERY_ARTICLES = {
+  populate: {
+    fields: ['slug', 'title', 'summary', 'published', 'author', 'label'],
+    multimedia: {
+      fields: ['url', 'name', 'alternativeText', 'width', 'height'],
+    },
+  },
+  sort: ['published:desc'],
+  // pagination: {
+  //   page: 1,
+  //   pageSize: 10,
+  // },
+};
+
+export const QUERY_ARTICLE_BY_ID = {
+  populate: {
+    fields: [
+      'slug',
+      'title',
+      'content',
+      'summary',
+      'published',
+      'author',
+      'label',
+    ],
+    multimedia: {
+      fields: ['url', 'name', 'alternativeText', 'width', 'height'],
     },
   },
 };

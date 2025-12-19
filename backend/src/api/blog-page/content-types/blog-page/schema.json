@@ -19,11 +19,6 @@
     "description": {
       "type": "text",
       "minLength": 6
-    },
-    "articles": {
-      "type": "component",
-      "component": "blog.article",
-      "repeatable": true
     }
   }
 }

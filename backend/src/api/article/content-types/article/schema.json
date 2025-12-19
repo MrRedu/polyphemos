@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Article"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "required": true,
+      "unique": true
+    },
+    "content": {
+      "type": "text",
+      "minLength": 32,
+      "required": true
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 16,
+      "maxLength": 255,
+      "required": true,
+      "unique": false
+    },
+    "label": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Desarrollo",
+      "enum": [
+        "Desarrollo",
+        "Diseño",
+        "IA"
+      ]
+    },
+    "author": {
+      "type": "string",
+      "default": "John Doe",
+      "minLength": 3,
+      "required": true
+    },
+    "published": {
+      "type": "date",
+      "required": true,
+      "default": "2026-01-01"
+    },
+    "multimedia": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

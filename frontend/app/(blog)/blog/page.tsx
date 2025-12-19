@@ -1,5 +1,5 @@
 import { Blog } from '@/components/organisms/blog';
-import { getBlogPage } from '@/lib/strapi';
+import { getArticles, getBlogPage } from '@/lib/strapi';
 
 export async function generateMetadata() {
   const blogPage = await getBlogPage();
@@ -10,13 +10,11 @@ export async function generateMetadata() {
 }
 
 export default async function BlogPage() {
-  // props: BlogPageProps
-  const blogPage = await getBlogPage();
-  console.log(blogPage);
+  const articles = await getArticles();
 
   return (
     <>
-      <Blog articles={blogPage.articles} />
+      <Blog articles={articles} />
     </>
   );
 }

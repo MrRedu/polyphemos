@@ -1,9 +1,34 @@
 import qs from 'qs';
 import { cacheLife } from 'next/cache';
 
-import { QUERY_BLOG_PAGE, QUERY_HOME_PAGE } from './queries';
+import {
+  QUERY_ARTICLE_BY_ID,
+  QUERY_ARTICLES,
+  QUERY_BLOG_PAGE,
+  QUERY_HOME_PAGE,
+} from './queries';
 
 export const STRAPI_BASE_URL = 'http://localhost:1337';
+
+export async function getArticles() {
+  'use cache';
+  cacheLife({ expire: 60 * 15 });
+
+  const query = qs.stringify(QUERY_ARTICLES);
+  const response = await getStrapiData(`/api/articles?${query}`);
+  return response?.data;
+}
+
+export async function getArticleById(id: string) {
+  'use cache';
+  cacheLife({ expire: 60 * 15 });
+
+  const query = qs.stringify(QUERY_ARTICLE_BY_ID);
+  const response = await getStrapiData(
+    `/api/articles?filters[slug][$eq]=el-futuro-de-la-ia-generativa-mas-alla-de-los-chatbots&populate=*`
+  );
+  return response?.data;
+}
 
 export async function getBlogPage() {
   'use cache';

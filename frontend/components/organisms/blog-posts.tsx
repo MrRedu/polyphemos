@@ -1,23 +1,11 @@
 import { cn } from '@/lib/utils';
 import { CardPost } from '../molecules/card-post';
-
-// Mover Post a otro lugar
-type Post = {
-  id: string;
-  title: string;
-  summary: string;
-  label: string;
-  author: string;
-  published: string;
-  url: string;
-  image: string;
-  tags?: string[];
-};
+import type { Article } from '@/types/types';
 
 interface BlogProps {
   heading?: string;
   description?: string;
-  posts: Post[];
+  posts: Article[];
   className?: string;
 }
 

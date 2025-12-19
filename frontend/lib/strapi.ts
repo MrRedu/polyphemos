@@ -1,33 +1,26 @@
-// import { cacheLife } from 'next/cache';
 import qs from 'qs';
+import { cacheLife } from 'next/cache';
+
+import { QUERY_BLOG_PAGE, QUERY_HOME_PAGE } from './queries';
+
 export const STRAPI_BASE_URL = 'http://localhost:1337';
 
-const QUERY_HOME_PAGE = {
-  populate: {
-    fields: ['title', 'description'],
-    blogSection: {
-      fields: ['title', 'description'],
-      populate: {
-        CardPost: {
-          fields: ['title', 'summary', 'published', 'author', 'tags', 'label'],
-          populate: {
-            image: {
-              fields: ['url', 'name', 'alternativeText', 'width', 'height'],
-            },
-          },
-        },
-      },
-    },
-  },
-};
+export async function getBlogPage() {
+  'use cache';
+  cacheLife({ expire: 60 * 15 });
+
+  const query = qs.stringify(QUERY_BLOG_PAGE);
+  const response = await getStrapiData(`/api/blog-page?${query}`);
+  return response?.data;
+}
 
 export async function getHomePage() {
-  // 'use cache';
-  // cacheLife({ expire: 60 * 15 });
+  'use cache';
+  cacheLife({ expire: 60 * 15 });
 
   const query = qs.stringify(QUERY_HOME_PAGE);
-  const { data, meta } = await getStrapiData(`/api/home-page?${query}`);
-  return data;
+  const response = await getStrapiData(`/api/home-page?${query}`);
+  return response?.data;
 }
 
 export async function getStrapiData(url: string) {

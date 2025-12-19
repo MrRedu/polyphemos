@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_blog_articles",
+  "info": {
+    "displayName": "Article",
+    "icon": "stack"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "required": true
+    },
+    "content": {
+      "type": "text"
+    },
+    "summary": {
+      "type": "text"
+    },
+    "label": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Desarrollo",
+      "enum": [
+        "Desarrollo",
+        "IA",
+        "Diseño UX/UX"
+      ]
+    },
+    "author": {
+      "type": "string"
+    },
+    "published": {
+      "type": "date"
+    },
+    "multimedia": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "tags": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

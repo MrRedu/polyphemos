@@ -40,6 +40,7 @@ export const QUERY_ARTICLE_BY_ID = {
     ],
     multimedia: {
       fields: ['url', 'name', 'alternativeText', 'width', 'height'],
+      // fields: ['*'],
     },
   },
 };

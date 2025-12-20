@@ -24,10 +24,14 @@ export async function getArticleById(id: string) {
   cacheLife({ expire: 60 * 15 });
 
   const query = qs.stringify(QUERY_ARTICLE_BY_ID);
+  // const response = await getStrapiData(
+  //   `/api/articles?filters[slug][$eq]=el-futuro-de-la-ia-generativa-mas-alla-de-los-chatbots&populate=*`
+  // );
   const response = await getStrapiData(
-    `/api/articles?filters[slug][$eq]=el-futuro-de-la-ia-generativa-mas-alla-de-los-chatbots&populate=*`
+    `/api/articles?filters[slug][$eq]=${id}&${query}`
   );
-  return response?.data;
+
+  return response?.data?.[0];
 }
 
 export async function getBlogPage() {

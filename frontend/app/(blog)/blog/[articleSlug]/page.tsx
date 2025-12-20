@@ -1,3 +1,4 @@
+import { BlockRendererClient } from '@/components/organisms/block-renderer-client';
 import { getArticleById, STRAPI_BASE_URL } from '@/lib/strapi';
 import { calculateReadingMinutes, cn, formatDate } from '@/lib/utils';
 import { Article } from '@/types/types';
@@ -48,7 +49,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 </nav>
                 <div className="flex w-full flex-col gap-5">
                   <div className="flex items-center justify-center gap-2.5 text-sm font-medium text-foreground/60">
-                    {/* <div>10 min read</div> */}
                     <div>
                       {calculateReadingMinutes(article.content)} min read{' '}
                     </div>
@@ -99,9 +99,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
             {/* Content */}
             <div className="flex w-full max-w-[40rem] flex-col gap-10">
-              <pre className="whitespace-pre-wrap">
+              <div className="">
+                <BlockRendererClient content={article?.content} />
+              </div>
+              {/* <pre className="whitespace-pre-wrap">
                 {JSON.stringify(article, null, 2)}
-              </pre>
+              </pre> */}
             </div>
           </div>
         </div>

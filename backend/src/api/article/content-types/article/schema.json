@@ -23,8 +23,7 @@
       "unique": true
     },
     "content": {
-      "type": "text",
-      "minLength": 32,
+      "type": "blocks",
       "required": true
     },
     "summary": {

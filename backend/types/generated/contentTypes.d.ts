@@ -447,11 +447,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         minLength: 3;
       }> &
       Schema.Attribute.DefaultTo<'John Doe'>;
-    content: Schema.Attribute.Text &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 32;
-      }>;
+    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

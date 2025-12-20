@@ -1,3 +1,5 @@
+import { type BlocksContent } from '@strapi/blocks-react-renderer';
+
 type Multimedia = {
   url: string;
   name: string;
@@ -9,7 +11,9 @@ type Multimedia = {
 export type Article = {
   slug: string;
   title: string;
-  content: string;
+
+  content: BlocksContent;
+
   summary: string;
   label: string;
   author: string;

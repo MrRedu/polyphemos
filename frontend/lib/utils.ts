@@ -1,3 +1,4 @@
+import { BlocksContent } from '@strapi/blocks-react-renderer';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -17,9 +18,24 @@ export function formatDate(date: string): string | undefined {
   }).format(new Date(date));
 }
 
-export function calculateReadingMinutes(text: string): number {
+export function calculateReadingMinutes(content: BlocksContent): number {
   const wordsPerMinute = 225;
-  const wordCount = text.trim().split(/\s+/).length;
+
+  const plainText = extractPlainText(content);
+  const wordCount = plainText.trim().split(/\s+/).length;
 
   return Math.ceil(wordCount / wordsPerMinute);
+}
+
+function extractPlainText(blocks: BlocksContent): string {
+  return blocks
+    .map((block) => {
+      if (block.children) {
+        return block.children
+          .map((child) => (child.type === 'text' && child.text) || '')
+          .join(' ');
+      }
+      return '';
+    })
+    .join(' ');
 }

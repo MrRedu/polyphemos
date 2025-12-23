@@ -1,10 +1,20 @@
-import { Blog } from '@/components/organisms/blog-posts';
-import { posts } from '@/lib/constants';
+import { Blog } from '@/components/organisms/blog';
+import { getBlogPage, getArticles } from '@/lib/strapi';
 
-export default function HomePage() {
+export async function generateMetadata() {
+  const blogPage = await getBlogPage();
+  return {
+    title: blogPage.title,
+    description: blogPage.description,
+  };
+}
+
+export default async function HomePage() {
+  const { articles, meta } = await getArticles({ page: 1 });
+
   return (
     <>
-      <Blog posts={posts} />
+      <Blog initialArticles={articles} initialMeta={meta} />
     </>
   );
 }

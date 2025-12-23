@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_layout_blog_sections",
+  "info": {
+    "displayName": "Blog Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Blog posts",
+      "minLength": 3,
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 255,
+      "required": false
+    }
+  },
+  "config": {}
+}

@@ -1,37 +1,25 @@
 import { cn } from '@/lib/utils';
 import { CardPost } from '../molecules/card-post';
-
-// Mover Post a otro lugar
-type Post = {
-  id: string;
-  title: string;
-  summary: string;
-  label: string;
-  author: string;
-  published: string;
-  url: string;
-  image: string;
-  tags?: string[];
-};
+import type { Article } from '@/types/types';
 
 interface BlogProps {
   heading?: string;
   description?: string;
-  posts: Post[];
+  posts: Article[];
   className?: string;
 }
 
 export const Blog = ({
-  heading = 'Blog Posts',
+  heading = 'Blog posts',
   description = 'Discover the latest insights and tutorials about modern web development, UI design, and component-driven architecture.',
   posts,
   className,
 }: BlogProps) => {
   return (
     <section className={cn('py-32', className)}>
-      <div className="container flex flex-col items-center gap-16">
+      <div className="container flex flex-col items-center gap-16 mx-auto w-full">
         <div className="text-center">
-          <h2 className="mx-auto mb-6 text-3xl font-semibold text-pretty md:text-4xl lg:max-w-3xl">
+          <h2 className="mx-auto mb-6 text-3xl font-cormorant font-semibold text-pretty md:text-4xl lg:max-w-3xl">
             {heading}
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground md:text-lg">

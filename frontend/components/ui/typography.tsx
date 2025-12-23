@@ -42,6 +42,7 @@ type POSSIBLE_VARIANTS =
 interface TypographyProps {
   variant?: POSSIBLE_VARIANTS;
   className?: string;
+  id?: string;
   children: React.ReactNode;
 }
 
@@ -65,6 +66,7 @@ export const Typography = ({
   variant = 'p',
   className,
   children,
+  id,
   ...props
 }: TypographyProps) => {
   const Tag = tagMap[variant] || 'p';
@@ -73,6 +75,7 @@ export const Typography = ({
     <Tag
       data-slot="typography"
       className={typographyVariants({ variant, className })}
+      id={id || undefined}
       {...props}
     >
       {children}

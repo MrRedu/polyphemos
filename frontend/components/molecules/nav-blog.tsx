@@ -9,7 +9,7 @@ import {
   CommandList,
 } from '@/components/ui/command';
 
-import { MoveLeft, MoveRight, SearchIcon } from 'lucide-react';
+import { MoveRight, SearchIcon } from 'lucide-react';
 import { Input } from '../ui/input';
 import { Kbd } from '../ui/kbd';
 import Link from 'next/link';
@@ -20,12 +20,12 @@ const LABELS = [
     href: '#development',
   },
   {
-    label: 'IA',
-    href: '#ia',
-  },
-  {
     label: 'Design',
     href: '#design',
+  },
+  {
+    label: 'IA',
+    href: '#ia',
   },
 ];
 
@@ -48,14 +48,16 @@ export const NavBlog = ({ availableArticleTitles }: NavBlogProps) => {
 
   return (
     <>
-      <nav className="w-full flex items-center justify-between">
+      <nav className="w-full flex md:flex-row flex-col gap-2 items-center justify-between">
         <ul className="flex gap-4 text-muted-foreground font-medium">
           <li>
-            <a href="#all">All</a>
+            <Link href="#all" className="font-bold">
+              All
+            </Link>
           </li>
           {LABELS.map((label) => (
             <li key={label.label}>
-              <a href={label.href}>{label.label}</a>
+              <Link href={label.href}>{label.label}</Link>
             </li>
           ))}
         </ul>
@@ -64,7 +66,7 @@ export const NavBlog = ({ availableArticleTitles }: NavBlogProps) => {
           <div className="relative w-full max-w-xs">
             <Input
               name="search"
-              className="peer h-8 ps-8 pe-10 rounded-full"
+              className="peer h-8 ps-8 pe-10 rounded-full bg-white"
               placeholder={'Search...'}
               type="search"
               onClick={() => setOpen(true)}
@@ -81,7 +83,7 @@ export const NavBlog = ({ availableArticleTitles }: NavBlogProps) => {
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Search..." />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>Sin resultados.</CommandEmpty>
           <CommandGroup heading="Navigation">
             {availableArticleTitles.map((article) => (
               <CommandItem key={article.slug}>

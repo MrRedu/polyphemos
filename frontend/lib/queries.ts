@@ -21,10 +21,10 @@ export const QUERY_ARTICLES = {
     },
   },
   sort: ['published:desc'],
-  // pagination: {
-  //   page: 1,
-  //   pageSize: 10,
-  // },
+  pagination: {
+    page: 1,
+    pageSize: 13,
+  },
 };
 
 export const QUERY_ARTICLE_BY_ID = {

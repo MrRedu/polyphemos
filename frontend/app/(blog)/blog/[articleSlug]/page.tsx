@@ -1,3 +1,4 @@
+import { NavArticle } from '@/components/molecules/nav-article';
 import { BlockRendererClient } from '@/components/organisms/block-renderer-client';
 import { getArticleById, STRAPI_BASE_URL } from '@/lib/strapi';
 import { calculateReadingMinutes, cn, formatDate } from '@/lib/utils';
@@ -26,6 +27,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const article: Article = await getArticleById(articleSlug);
   const imageUrl = `${STRAPI_BASE_URL}${article?.multimedia?.[0]?.url}`;
 
+  const readingMinutes = calculateReadingMinutes(article.content);
+
   if (!article) return notFound();
 
   return (
@@ -49,9 +52,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 </nav>
                 <div className="flex w-full flex-col gap-5">
                   <div className="flex items-center justify-center gap-2.5 text-sm font-medium text-foreground/60">
-                    <div>
-                      {calculateReadingMinutes(article.content)} min read{' '}
-                    </div>
+                    <div>{readingMinutes} min read </div>
                     <div>{` | `}</div>
                     {/* <div>May 18, 2025</div> */}
                     <div>{formatDate(article.published)}</div>
@@ -74,37 +75,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <div className="container pt-20 px-8 mx-auto">
           <div className="relative mx-auto w-full max-w-5xl items-start justify-between gap-20 lg:flex">
             {/* Navigation */}
-            <div className="top-20 flex-1 bg-background pb-10 lg:sticky lg:pb-0">
-              <div className="text-xl leading-snug font-medium">Chapters</div>
-              <div className="flex flex-col gap-2 pt-2 pl-2">
-                <a
-                  href="#heading-1"
-                  className="block text-sm leading-normal font-medium text-muted-foreground transition duration-300 lg:rounded-md lg:bg-muted lg:p-2 lg:font-bold lg:!text-primary"
-                >
-                  The Role of UI Components in Development
-                </a>
-                <a
-                  href="#heading-2"
-                  className="block text-sm leading-normal font-medium text-muted-foreground transition duration-300 text-muted-foreground"
-                >
-                  Core Types of UI Components
-                </a>
-                <a
-                  href="#heading-3"
-                  className="block text-sm leading-normal font-medium text-muted-foreground transition duration-300 text-muted-foreground"
-                >
-                  End Paragraph
-                </a>
-              </div>
+            <div className="top-20 flex-1 pb-10 lg:sticky lg:pb-0">
+              <NavArticle content={article?.content} />
             </div>
             {/* Content */}
             <div className="flex w-full max-w-[40rem] flex-col gap-10">
               <div className="">
                 <BlockRendererClient content={article?.content} />
               </div>
-              {/* <pre className="whitespace-pre-wrap">
+              <pre className="whitespace-pre-wrap">
                 {JSON.stringify(article, null, 2)}
-              </pre> */}
+              </pre>
             </div>
           </div>
         </div>

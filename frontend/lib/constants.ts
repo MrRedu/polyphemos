@@ -26,3 +26,22 @@ export const posts = [
     tags: ['Web Design', 'CSS'],
   },
 ];
+
+export const FOOTER_LINKS = [
+  {
+    label: 'Home',
+    href: '/',
+  },
+  {
+    label: 'About',
+    href: '#',
+  },
+  {
+    label: 'Contact',
+    href: '#',
+  },
+  {
+    label: 'Privacy',
+    href: '#',
+  },
+];

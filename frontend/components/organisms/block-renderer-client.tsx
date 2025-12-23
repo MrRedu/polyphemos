@@ -1,13 +1,9 @@
 'use client';
-import Image from 'next/image';
 
-import {
-  BlocksRenderer,
-  type BlocksContent,
-} from '@strapi/blocks-react-renderer';
-import Link from 'next/link';
+import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { Typography } from '../ui/typography';
-import { relative } from 'path';
+import Link from 'next/link';
+import { slugify } from '@/lib/utils';
 
 export const BlockRendererClient = ({
   content,
@@ -21,21 +17,50 @@ export const BlockRendererClient = ({
       content={content}
       blocks={{
         heading: ({ children, level }) => {
+          const headingId = slugify(children![0].props.text);
           switch (level) {
             case 1:
-              return <Typography variant="h1">{children}</Typography>;
+              return (
+                <Typography variant="h1" id={headingId}>
+                  {children}
+                </Typography>
+              );
             case 2:
-              return <Typography variant="h2">{children}</Typography>;
+              return (
+                <Typography variant="h2" id={headingId}>
+                  {children}
+                </Typography>
+              );
             case 3:
-              return <Typography variant="h3">{children}</Typography>;
+              return (
+                <Typography variant="h3" id={headingId}>
+                  {children}
+                </Typography>
+              );
             case 4:
-              return <Typography variant="h4">{children}</Typography>;
+              return (
+                <Typography variant="h4" id={headingId}>
+                  {children}
+                </Typography>
+              );
             case 5:
-              return <Typography variant="h5">{children}</Typography>;
+              return (
+                <Typography variant="h5" id={headingId}>
+                  {children}
+                </Typography>
+              );
             case 6:
-              return <Typography variant="h6">{children}</Typography>;
+              return (
+                <Typography variant="h6" id={headingId}>
+                  {children}
+                </Typography>
+              );
             default:
-              return <Typography variant="h1">{children}</Typography>;
+              return (
+                <Typography variant="h1" id={headingId}>
+                  {children}
+                </Typography>
+              );
           }
         },
         paragraph: ({ children }) => (

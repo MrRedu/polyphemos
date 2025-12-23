@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { cacheLife } from 'next/cache';
+// import { cacheLife } from 'next/cache';
 
 import {
   QUERY_ARTICLE_BY_ID,
@@ -10,33 +10,37 @@ import {
 
 export const STRAPI_BASE_URL = 'http://localhost:1337';
 
-export async function getArticles() {
-  'use cache';
-  cacheLife({ expire: 60 * 15 });
-
-  const query = qs.stringify(QUERY_ARTICLES);
-  const response = await getStrapiData(`/api/articles?${query}`);
-  return response?.data;
-}
-
 export async function getArticleById(id: string) {
-  'use cache';
-  cacheLife({ expire: 60 * 15 });
+  // 'use cache';
+  // cacheLife({ expire: 60 * 15 });
 
   const query = qs.stringify(QUERY_ARTICLE_BY_ID);
-  // const response = await getStrapiData(
-  //   `/api/articles?filters[slug][$eq]=el-futuro-de-la-ia-generativa-mas-alla-de-los-chatbots&populate=*`
-  // );
   const response = await getStrapiData(
+    // /api/articles?filters[slug][$eq]=el-futuro-de-la-ia-generativa-mas-alla-de-los-chatbots&populate=*
     `/api/articles?filters[slug][$eq]=${id}&${query}`
   );
 
   return response?.data?.[0];
 }
 
+export async function getArticles({ page = 1 }: { page?: number }) {
+  const query = qs.stringify({
+    ...QUERY_ARTICLES,
+    pagination: {
+      page: page,
+      pageSize: 13,
+    },
+  });
+  const response = await getStrapiData(`/api/articles?${query}`);
+  return {
+    articles: response?.data || [],
+    meta: response?.meta?.pagination || {},
+  };
+}
+
 export async function getBlogPage() {
-  'use cache';
-  cacheLife({ expire: 60 * 15 });
+  // 'use cache';
+  // cacheLife({ expire: 60 * 15 });
 
   const query = qs.stringify(QUERY_BLOG_PAGE);
   const response = await getStrapiData(`/api/blog-page?${query}`);
@@ -44,8 +48,8 @@ export async function getBlogPage() {
 }
 
 export async function getHomePage() {
-  'use cache';
-  cacheLife({ expire: 60 * 15 });
+  // 'use cache';
+  // cacheLife({ expire: 60 * 15 });
 
   const query = qs.stringify(QUERY_HOME_PAGE);
   const response = await getStrapiData(`/api/home-page?${query}`);

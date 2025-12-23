@@ -1,10 +1,10 @@
 import { NavArticle } from '@/components/molecules/nav-article';
 import { BlockRendererClient } from '@/components/organisms/block-renderer-client';
 import { getArticleById, STRAPI_BASE_URL } from '@/lib/strapi';
-import { calculateReadingMinutes, cn, formatDate } from '@/lib/utils';
+import { calculateReadingMinutes, formatDate } from '@/lib/utils';
 import { Article } from '@/types/types';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
 interface ArticlePageProps {
   params: {
@@ -25,21 +25,20 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleSlug } = await params;
   const article: Article = await getArticleById(articleSlug);
-  const imageUrl = `${STRAPI_BASE_URL}${article?.multimedia?.[0]?.url}`;
-
+  const imageUrl = `${STRAPI_BASE_URL}${article?.cover?.url}`;
   const readingMinutes = calculateReadingMinutes(article.content);
 
   if (!article) return notFound();
 
   return (
-    <div className="my-auto flex w-full justify-center">
+    <div className="my-auto flex w-full justify-center ">
       <section className="pb-32 w-full">
         {/* Hero */}
         <div
-          className={cn(
-            `bg-muted bg-cover bg-repeat py-20 relative`,
-            "before:content-[''] before:absolute before:inset-0 before:bg-white/30 before:backdrop-blur-xs before:z-0"
-          )}
+          className={`
+            bg-muted bg-cover bg-repeat py-4 relative min-h-svh grid items-center
+            before:content-[''] before:absolute before:inset-0 before:bg-white/30 before:backdrop-blur-xs before:z-0
+            `}
           style={{ backgroundImage: `url('${imageUrl}')` }}
         >
           <div className="container relative z-10 flex flex-col items-start justify-start gap-16 py-20 lg:flex-row lg:items-end lg:justify-between mx-auto px-8">
@@ -71,7 +70,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
           </div>
         </div>
-        {/* Content */}
+        {/* Article content */}
         <div className="container pt-20 px-8 mx-auto">
           <div className="relative mx-auto w-full max-w-5xl items-start justify-between gap-20 lg:flex">
             {/* Navigation */}
@@ -79,13 +78,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <NavArticle content={article?.content} />
             </div>
             {/* Content */}
-            <div className="flex w-full max-w-[40rem] flex-col gap-10">
+            <div className="flex w-full max-w-[40rem] flex-col gap-10 min-h-[50vh]">
               <div className="">
                 <BlockRendererClient content={article?.content} />
               </div>
-              <pre className="whitespace-pre-wrap">
+              {/* <pre className="whitespace-pre-wrap">
                 {JSON.stringify(article, null, 2)}
-              </pre>
+              </pre> */}
             </div>
           </div>
         </div>

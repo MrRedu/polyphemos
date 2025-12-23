@@ -16,15 +16,15 @@ export const QUERY_BLOG_PAGE = {
 export const QUERY_ARTICLES = {
   populate: {
     fields: ['slug', 'title', 'summary', 'published', 'author', 'label'],
-    multimedia: {
+    cover: {
       fields: ['url', 'name', 'alternativeText', 'width', 'height'],
     },
   },
   sort: ['published:desc'],
-  pagination: {
-    page: 1,
-    pageSize: 13,
-  },
+  // pagination: {
+  //   page: 1,
+  //   pageSize: 13,
+  // },
 };
 
 export const QUERY_ARTICLE_BY_ID = {
@@ -38,7 +38,7 @@ export const QUERY_ARTICLE_BY_ID = {
       'author',
       'label',
     ],
-    multimedia: {
+    cover: {
       fields: ['url', 'name', 'alternativeText', 'width', 'height'],
       // fields: ['*'],
     },

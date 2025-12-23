@@ -16,12 +16,12 @@ import Link from 'next/link';
 
 const LABELS = [
   {
-    label: 'Development',
-    href: '#development',
+    label: 'Desarrollo',
+    href: '#desarrollo',
   },
   {
-    label: 'Design',
-    href: '#design',
+    label: 'Diseño',
+    href: '#diseño',
   },
   {
     label: 'IA',
@@ -52,7 +52,7 @@ export const NavBlog = ({ availableArticleTitles }: NavBlogProps) => {
         <ul className="flex gap-4 text-muted-foreground font-medium">
           <li>
             <Link href="#all" className="font-bold">
-              All
+              Todos
             </Link>
           </li>
           {LABELS.map((label) => (
@@ -89,6 +89,7 @@ export const NavBlog = ({ availableArticleTitles }: NavBlogProps) => {
               <CommandItem key={article.slug}>
                 <Link
                   href={`/blog/${article.slug}`}
+                  onClick={() => setOpen(false)}
                   className="flex gap-2 items-center"
                 >
                   <MoveRight size={14} />

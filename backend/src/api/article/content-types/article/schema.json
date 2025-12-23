@@ -54,15 +54,13 @@
       "required": true,
       "default": "2026-01-01"
     },
-    "multimedia": {
+    "cover": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "allowedTypes": [
         "images",
-        "files",
-        "videos",
-        "audios"
+        "files"
       ]
     }
   }

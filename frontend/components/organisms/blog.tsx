@@ -1,19 +1,53 @@
+'use client';
+
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Article } from '@/types/types';
-import { NavBlog } from '../molecules/nav-blog';
-import { CardArticle } from '../molecules/card-article';
-import { Separator } from '../ui/separator';
-import { Button } from '../ui/button';
+import type { Article, MetaResponse } from '@/types/types';
+import { NavBlog } from '@/components/molecules/nav-blog';
+import { CardArticle } from '@/components/molecules/card-article';
+import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { getArticles } from '@/lib/strapi';
 
 interface BlogProps {
-  articles: Article[];
+  initialArticles: Article[];
+  initialMeta: MetaResponse;
   className?: string;
 }
 
-export const Blog = ({ articles, className }: BlogProps) => {
+export const Blog = ({
+  initialArticles,
+  initialMeta,
+  className,
+}: BlogProps) => {
+  const [articles, setArticles] = useState(initialArticles);
+  const [pagination, setPagination] = useState(initialMeta);
+  const [loading, setLoading] = useState(false);
+
+  const loadMore = async () => {
+    const nextPage = pagination.page + 1;
+    setLoading(true);
+
+    try {
+      const { articles: newArticles, meta } = await getArticles({
+        page: nextPage,
+      });
+
+      // Concatenamos los artículos nuevos a los existentes
+      setArticles((prev) => [...prev, ...newArticles]);
+      setPagination(meta);
+    } catch (error) {
+      console.error('Error cargando más artículos', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const availableArticleTitles = articles.map((article) => {
     return { title: article.title, slug: article.slug };
   });
+
+  const hasMore = pagination.page < pagination.pageCount;
 
   return (
     <section className={cn('py-32 px-2', className)}>
@@ -28,7 +62,7 @@ export const Blog = ({ articles, className }: BlogProps) => {
               summary={article.summary}
               author={article.author}
               published={article.published}
-              imageUrl={article.multimedia[0].url}
+              imageUrl={article.cover?.url}
             />
           ))}
         </div>
@@ -42,15 +76,20 @@ export const Blog = ({ articles, className }: BlogProps) => {
               summary={article.summary}
               author={article.author}
               published={article.published}
-              imageUrl={article.multimedia[0].url}
+              imageUrl={article.cover?.url}
               isSecondary
             />
           ))}
         </div>
-        {articles.length > 4 && (
+        {hasMore && (
           <div className="flex items-center justify-center mt-16">
-            <Button variant="outline" size="lg">
-              Load more
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={loadMore}
+              disabled={loading}
+            >
+              {loading ? 'Cargando...' : 'Cargar más'}
             </Button>
           </div>
         )}

@@ -1,23 +1,20 @@
 import { Blog } from '@/components/organisms/blog';
-import { getArticles, getBlogPage } from '@/lib/strapi';
+import { getBlogPage, getArticles } from '@/lib/strapi';
 
 export async function generateMetadata() {
   const blogPage = await getBlogPage();
   return {
-    title: {
-      default: blogPage.title,
-      template: `%s | ${blogPage.title}`,
-    },
+    title: blogPage.title,
     description: blogPage.description,
   };
 }
 
 export default async function HomePage() {
-  const articles = await getArticles();
+  const { articles, meta } = await getArticles({ page: 1 });
 
   return (
     <>
-      <Blog articles={articles} />
+      <Blog initialArticles={articles} initialMeta={meta} />
     </>
   );
 }

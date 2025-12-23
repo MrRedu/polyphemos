@@ -1,6 +1,6 @@
 import { type BlocksContent } from '@strapi/blocks-react-renderer';
 
-type Multimedia = {
+type Cover = {
   url: string;
   name: string;
   alternativeText: string;
@@ -8,15 +8,22 @@ type Multimedia = {
   height: number;
 };
 
+export type Label = 'Desarrollo' | 'IA' | 'Diseño';
+
 export type Article = {
   slug: string;
   title: string;
-
   content: BlocksContent;
-
   summary: string;
-  label: string;
+  label: Label;
   author: string;
   published: string;
-  multimedia: Multimedia[];
+  cover: Cover;
+};
+
+export type MetaResponse = {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
 };

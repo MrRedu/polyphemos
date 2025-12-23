@@ -1,12 +1,12 @@
 import { STRAPI_BASE_URL } from '@/lib/strapi';
-import { cn } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
 import type { Article } from '@/types/types';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface CardArticleProps
   extends Pick<Article, 'slug' | 'title' | 'summary' | 'author' | 'published'> {
-  imageUrl: Article['multimedia'][0]['url'];
+  imageUrl: Article['cover']['url'];
   isSecondary?: boolean;
 }
 
@@ -40,7 +40,7 @@ export const CardArticle = ({
           <span className="text-muted-foreground text-sm">
             {author}
             <span className="inline-block mx-1">{` · `}</span>
-            {published}
+            {formatDate(published)}
           </span>
           <MoveRight className="size-4 opacity-0 -translate-x-2  group-hover:translate-x-0 group-hover:opacity-100 duration-300 ease-in" />
         </div>

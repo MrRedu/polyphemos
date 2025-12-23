@@ -31,13 +31,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!article) return notFound();
 
   return (
-    <div className="my-auto flex w-full justify-center ">
+    <div className="my-auto flex w-full justify-center">
       <section className="pb-32 w-full">
         {/* Hero */}
         <div
           className={`
             bg-muted bg-cover bg-repeat py-4 relative min-h-svh grid items-center
-            before:content-[''] before:absolute before:inset-0 before:bg-white/30 before:backdrop-blur-xs before:z-0
+            before:content-[''] before:absolute before:inset-0 before:bg-white/30 dark:before:bg-black/30 before:backdrop-blur-xs before:z-0
             `}
           style={{ backgroundImage: `url('${imageUrl}')` }}
         >

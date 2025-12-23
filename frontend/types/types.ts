@@ -8,7 +8,7 @@ type Cover = {
   height: number;
 };
 
-export type Label = 'Desarrollo' | 'IA' | 'Diseño';
+export type Label = 'Todos' | 'Desarrollo' | 'IA' | 'Diseño';
 
 export type Article = {
   slug: string;

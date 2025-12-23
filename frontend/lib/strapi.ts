@@ -7,6 +7,7 @@ import {
   QUERY_BLOG_PAGE,
   QUERY_HOME_PAGE,
 } from './queries';
+import { Label } from '@/types/types';
 
 export const STRAPI_BASE_URL = 'http://localhost:1337';
 
@@ -23,14 +24,31 @@ export async function getArticleById(id: string) {
   return response?.data?.[0];
 }
 
-export async function getArticles({ page = 1 }: { page?: number }) {
-  const query = qs.stringify({
+export async function getArticles({
+  page = 1,
+  label = null,
+}: {
+  page?: number;
+  label?: Label | null;
+}) {
+  const queryObj = {
     ...QUERY_ARTICLES,
     pagination: {
       page: page,
       pageSize: 13,
     },
-  });
+    filters: {},
+  };
+
+  if (label && label !== 'Todos') {
+    queryObj.filters = {
+      label: {
+        $eq: label,
+      },
+    };
+  }
+
+  const query = qs.stringify(queryObj);
   const response = await getStrapiData(`/api/articles?${query}`);
   return {
     articles: response?.data || [],

@@ -1,30 +1,46 @@
-import Image from 'next/image';
+import { Sun } from 'lucide-react';
 import Link from 'next/link';
 
 export const Header = () => {
   return (
-    <header className="bg-[#d01216] fixed z-50 inset-x-0 p-6 flex justify-between px-8">
-      <span className="hidden md:block font-serif font-bold text-lg my-auto">
-        Polyphemos
-      </span>
-      <nav>
+    <header>
+      <div
+        className="fixed z-50 rounded-r-full top-3 left-0 flex items-center justify-between gap-6 py-6 px-8 
+        shadow-xs bg-white
+        font-serif font-bold "
+      >
         <Link href={'/'}>
-          <Image
-            src="/polyphemos.png"
-            alt="Polyphemos"
-            width={64}
-            height={64}
-            quality={100}
-            priority
-          />
+          <h1>Polyphemos</h1>
         </Link>
-      </nav>
-      <div className="font-bold space-x-4">
-        <Link href={'#'} className="underline">
-          ES
-        </Link>
-
-        <Link href={'#'}>EN</Link>
+      </div>
+      <div
+        className="fixed z-50 rounded-l-full top-3 right-0
+        flex items-center justify-between gap-6 py-6 px-8 
+        shadow-xs bg-white"
+      >
+        <nav>
+          <ul className="flex space-x-6">
+            <li>
+              <Link href={'#'}>Desarrollo</Link>
+            </li>
+            <li>
+              <Link href={'#'}>Diseño</Link>
+            </li>
+            <li>
+              <Link href={'#'}>IA</Link>
+            </li>
+          </ul>
+        </nav>
+        <div>
+          <Sun />
+        </div>
+        <div>
+          <Link href={'#'} className="underline">
+            ES
+          </Link>
+          <span>{' / '}</span>
+          <Link href={'#'}>EN</Link>
+        </div>
       </div>
     </header>
   );

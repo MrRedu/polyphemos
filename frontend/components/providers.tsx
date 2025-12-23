@@ -1,4 +1,4 @@
-// import { Header } from '@/components/landing/header';
+import { Header, Footer } from '@/components/landing';
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -7,8 +7,9 @@ interface ProvidersProps {
 export const Providers = ({ children }: ProvidersProps) => {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       {children}
+      <Footer />
     </>
   );
 };

@@ -22,26 +22,18 @@ export const Header = () => {
     console.log(theme);
   }, [theme]);
 
+  const sharedStyles =
+    'fixed z-50 top-3 flex items-center justify-between gap-6 py-6 px-8 shadow-xs bg-white dark:bg-black/30 dark:backdrop-blur-lg';
+
   return (
     <header>
-      <div
-        className="
-        fixed z-50 rounded-r-full top-3 left-0
-        flex items-center justify-between gap-6 py-6 px-8 
-        shadow-xs bg-white dark:bg-black/30 dark:backdrop-blur-lg
-        "
-      >
+      <div className={`${sharedStyles} rounded-r-full left-0`}>
         <Link href={'/'} className="font-serif font-bold">
           <h1>Polyphemos</h1>
         </Link>
       </div>
       <div
-        className="
-        fixed z-50 rounded-l-full top-3 right-0
-        flex items-center justify-between gap-6 py-6 px-8 
-        shadow-xs bg-white dark:bg-black/30 dark:backdrop-blur-lg
-        text-muted-foreground
-        "
+        className={`rounded-l-full right-0 ${sharedStyles} text-muted-foreground`}
       >
         {pathname === '/' && (
           <nav>

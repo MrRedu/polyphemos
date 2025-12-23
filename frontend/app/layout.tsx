@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
+import { Header, Footer } from '@/components/landing';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -40,7 +41,11 @@ export default function RootLayout({
         bg-[radial-gradient(circle,#73737350_1px,transparent_1px)] 
         "
         />
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

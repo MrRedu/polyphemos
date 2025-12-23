@@ -1,10 +1,11 @@
 import { NavArticle } from '@/components/molecules/nav-article';
 import { BlockRendererClient } from '@/components/organisms/block-renderer-client';
-import { getArticleById, STRAPI_BASE_URL } from '@/lib/strapi';
+import { getArticleById } from '@/lib/strapi';
 import { calculateReadingMinutes, formatDate } from '@/lib/utils';
 import { Article } from '@/types/types';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/lib/constants';
 
 interface ArticlePageProps {
   params: {
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleSlug } = await params;
   const article: Article = await getArticleById(articleSlug);
-  const imageUrl = `${STRAPI_BASE_URL}${article?.cover?.url}`;
+  const imageUrl = `${API_BASE_URL}${article?.cover?.url}`;
   const readingMinutes = calculateReadingMinutes(article.content);
 
   if (!article) return notFound();

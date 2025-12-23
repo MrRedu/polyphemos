@@ -1,6 +1,5 @@
 'use client';
 
-import { Header, Footer } from '@/components/landing';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
 interface ProvidersProps {
@@ -15,9 +14,8 @@ export const Providers = ({ children }: ProvidersProps) => {
       enableSystem
       disableTransitionOnChange
     >
-      <Header />
+      
       {children}
-      <Footer />
     </NextThemesProvider>
   );
 };

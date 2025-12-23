@@ -8,8 +8,7 @@ import {
   QUERY_HOME_PAGE,
 } from './queries';
 import { Label } from '@/types/types';
-
-export const STRAPI_BASE_URL = 'http://localhost:1337';
+import { API_BASE_URL } from './constants';
 
 export async function getArticleById(id: string) {
   // 'use cache';
@@ -76,7 +75,7 @@ export async function getHomePage() {
 
 export async function getStrapiData(url: string) {
   try {
-    const response = await fetch(`${STRAPI_BASE_URL}${url}`);
+    const response = await fetch(`${API_BASE_URL}${url}`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     return data;
@@ -85,3 +84,52 @@ export async function getStrapiData(url: string) {
     return null;
   }
 }
+
+export async function registerUserService(userData: {
+  username: string;
+  email: string;
+  password: string;
+}) {
+  const URL = `${API_BASE_URL}/api/auth/local/register`;
+
+  const payload = {
+    username: userData.username,
+    email: userData.email,
+    password: userData.password,
+  };
+
+  try {
+    const response = await fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error registering user', error);
+    return null;
+  }
+}
+
+// export async function loginUserService(userData: object) {
+//   const URL = `${API_BASE_URL}/api/auth/local`;
+//   try {
+//     const response = await fetch(URL, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(userData),
+//     });
+
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error('Error logging user', error);
+//     return null;
+//   }
+// }

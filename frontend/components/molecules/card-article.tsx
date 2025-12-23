@@ -1,4 +1,4 @@
-import { STRAPI_BASE_URL } from '@/lib/strapi';
+import { API_BASE_URL } from '@/lib/constants';
 import { cn, formatDate } from '@/lib/utils';
 import type { Article } from '@/types/types';
 import { MoveRight } from 'lucide-react';
@@ -30,7 +30,7 @@ export const CardArticle = ({
         )}
       >
         <img
-          src={`${STRAPI_BASE_URL}${imageUrl}`}
+          src={`${API_BASE_URL}${imageUrl}`}
           alt={title}
           className="w-full h-full min-h-full object-cover group-hover:scale-102 duration-200 ease-in"
         />

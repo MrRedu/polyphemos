@@ -36,7 +36,7 @@ export default function RootLayout({
         {/* Background dots */}
         <div
           className="
-        fixed inset-0 bg-[size:16px_16px] -z-10
+        fixed inset-0 bg-size-[16px_16px] -z-10
         bg-[radial-gradient(circle,#73737350_1px,transparent_1px)] 
         "
         />

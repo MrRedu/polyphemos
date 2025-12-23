@@ -23,12 +23,12 @@ export const Header = () => {
   }, [theme]);
 
   const sharedStyles =
-    'fixed z-50 top-3 flex items-center justify-between gap-6 py-6 px-8 shadow-xs bg-white dark:bg-black/30 dark:backdrop-blur-lg';
+    'fixed z-50 top-3 flex items-center justify-between gap-6 py-6 px-8 shadow-xs bg-white dark:bg-black/30 dark:backdrop-blur-lg max-h-[4.5rem]';
 
   return (
     <header>
       <div className={`${sharedStyles} rounded-r-full left-0`}>
-        <Link href={'/'} className="font-serif font-bold">
+        <Link href={'/'} className="font-bold" title="Go to home page">
           <h1>Polyphemos</h1>
         </Link>
       </div>
@@ -37,7 +37,7 @@ export const Header = () => {
       >
         {pathname === '/' && (
           <nav>
-            <ul className="flex space-x-6  font-medium">
+            <ul className="flex space-x-6 font-medium">
               {NAV_LABELS.map((label) => (
                 <li key={label.label}>
                   <Link

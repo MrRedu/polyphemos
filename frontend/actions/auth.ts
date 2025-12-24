@@ -1,8 +1,12 @@
 'use server';
 import { z } from 'zod';
 
-import { SignUpFormSchema, type FormState } from '@/validations/auth';
-import { registerUserService } from '@/lib/strapi';
+import {
+  SignInFormSchema,
+  SignUpFormSchema,
+  type FormState,
+} from '@/validations/auth';
+import { loginUserService, registerUserService } from '@/lib/strapi';
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -45,13 +49,56 @@ export async function registerUserAction(
   }
 
   // console.log('Validation successful');
-
   const response = await registerUserService(validatedFields.data);
   // console.log(response, 'response');
   if (!response || response.error) {
     return {
       success: false,
       message: 'Registration failed',
+      apiErrors: response?.error,
+      zodErrors: null,
+      data: {
+        ...prevState.data,
+        ...fields,
+      },
+    };
+  }
+
+  const cookieStore = await cookies();
+  cookieStore.set('jwt', response.jwt, cookieConfig);
+  redirect('/dashboard');
+}
+
+export async function loginUserAction(
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  const fields = {
+    identifier: formData.get('identifier') as string,
+    password: formData.get('password') as string,
+  };
+
+  const validatedFields = SignInFormSchema.safeParse(fields);
+
+  if (!validatedFields.success) {
+    const flattenedErrors = z.flattenError(validatedFields.error);
+    return {
+      success: false,
+      message: 'Authentication failed',
+      apiErrors: null,
+      zodErrors: flattenedErrors.fieldErrors,
+      data: {
+        ...prevState.data,
+        ...fields,
+      },
+    };
+  }
+
+  const response = await loginUserService(validatedFields.data);
+  if (!response || response.error) {
+    return {
+      success: false,
+      message: 'Authentication failed',
       apiErrors: response?.error,
       zodErrors: null,
       data: {

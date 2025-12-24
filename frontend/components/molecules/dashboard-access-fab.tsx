@@ -31,7 +31,7 @@ export const DashboardAccessFab = async () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel>Manage</DropdownMenuLabel>
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>
               <Link href={'/dashboard'}>Dashboard</Link>

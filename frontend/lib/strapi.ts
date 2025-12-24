@@ -16,7 +16,6 @@ export async function getArticleById(id: string) {
 
   const query = qs.stringify(QUERY_ARTICLE_BY_ID);
   const response = await getStrapiData(
-    // /api/articles?filters[slug][$eq]=el-futuro-de-la-ia-generativa-mas-alla-de-los-chatbots&populate=*
     `/api/articles?filters[slug][$eq]=${id}&${query}`
   );
 
@@ -115,21 +114,30 @@ export async function registerUserService(userData: {
   }
 }
 
-// export async function loginUserService(userData: object) {
-//   const URL = `${API_BASE_URL}/api/auth/local`;
-//   try {
-//     const response = await fetch(URL, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(userData),
-//     });
+export async function loginUserService(userData: {
+  identifier: string;
+  password: string;
+}) {
+  const URL = `${API_BASE_URL}/api/auth/local`;
 
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error('Error logging user', error);
-//     return null;
-//   }
-// }
+  const payload = {
+    identifier: userData.identifier,
+    password: userData.password,
+  };
+
+  try {
+    const response = await fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error logging user', error);
+    return null;
+  }
+}

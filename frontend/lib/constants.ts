@@ -5,13 +5,18 @@ export const FOOTER_LINKS = [
     label: 'Home',
     href: '/',
   },
+  // {
+  //   label: 'About',
+  //   href: '#',
+  // },
   {
-    label: 'About',
-    href: '#',
+    label: 'Manage',
+    href: '/sign-in',
   },
   {
     label: 'Contact',
-    href: '#',
+    href: 'https://www.linkedin.com/in/mrredu/',
+    target: '_blank',
   },
   {
     label: 'Privacy',

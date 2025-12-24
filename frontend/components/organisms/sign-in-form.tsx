@@ -9,8 +9,27 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Field, FieldGroup, FieldLabel } from '../ui/field';
+import { actions } from '@/actions';
+import { useActionState } from 'react';
+import { FormError } from '../atoms/form-error';
+
+const INITIAL_STATE = {
+  success: undefined,
+  message: undefined,
+  apiErrors: null,
+  zodErrors: null,
+  data: {
+    identifier: '',
+    password: '',
+  },
+};
 
 export const SignInForm = () => {
+  const [formState, formAction] = useActionState(
+    actions.auth.loginUser,
+    INITIAL_STATE
+  );
+
   return (
     <Card>
       <CardHeader>
@@ -21,17 +40,19 @@ export const SignInForm = () => {
       </CardHeader>
 
       <CardContent>
-        <form>
+        <form action={formAction}>
           <FieldGroup>
             <Field className="flex w-full flex-col gap-2">
-              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <FieldLabel htmlFor="identifier">Email or Username</FieldLabel>
               <Input
-                placeholder="m@example.com"
+                placeholder=""
                 required
-                type="email"
-                id="email"
+                type="text"
+                id="identifier"
+                name="identifier"
+                defaultValue={formState.data?.identifier}
               />
-              {/* <FormError error={formState.zodErrors?.<x>} /> */}
+              <FormError error={formState.zodErrors?.identifier} />
             </Field>
             <Field className="flex w-full flex-col gap-2">
               {/* <FieldLabel htmlFor="password">Password</FieldLabel> */}
@@ -44,10 +65,14 @@ export const SignInForm = () => {
                   Forgot your password?
                 </a>
               </div>
-              <Input id="password" type="password" required />
-              {/* <FormError error={formState.zodErrors?.<x>} /> */}
+              <Input id="password" type="password" required name="password" />
+              <FormError error={formState.zodErrors?.password} />
             </Field>
-
+            {formState.apiErrors && (
+              <div className="text-red-500 text-xs py-2">
+                {formState.apiErrors.message}
+              </div>
+            )}
             <FieldGroup>
               <Button type="submit" className="w-full">
                 Sign in

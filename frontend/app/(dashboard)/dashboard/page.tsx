@@ -1,9 +1,10 @@
+'use client';
 import { DASHBOARD_OPTIONS } from '@/lib/constants';
 import Link from 'next/link';
 
 export default function DashboardPage() {
   return (
-    <div className="my-24 rounded shadow-xs bg-background w-full max-w-[90vw] mx-auto min-h-[75vh]">
+    <div className="rounded shadow-xs bg-background w-full mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 p-8 h-full w-full gap-4">
         {DASHBOARD_OPTIONS.map((option) => (
           <Link

@@ -1,9 +1,14 @@
 import { z } from 'zod';
 
-// export const SignInFormSchema = z.object({
-//   email: z.string().email(),
-//   password: z.string().min(8),
-// });
+export const SignInFormSchema = z.object({
+  identifier: z
+    .string()
+    .min(3, { message: 'Identifier must be at least 3 chars' }),
+  password: z
+    .string()
+    .min(8, { message: 'Password must be at least 8 characters' })
+    .max(100, { message: 'Password must be at most 100 characters' }),
+});
 
 export const SignUpFormSchema = z
   .object({
@@ -27,7 +32,7 @@ export const SignUpFormSchema = z
   });
 
 export type SignUpFormValues = z.infer<typeof SignUpFormSchema>;
-// export type signInSchema = z.infer<typeof SignInFormSchema>;
+export type SignInFormSchema = z.infer<typeof SignInFormSchema>;
 
 export type FormState = {
   success?: boolean;

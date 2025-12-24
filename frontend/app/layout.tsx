@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Header, Footer } from '@/components/landing';
+import { DashboardAccessFab } from '@/components/molecules/dashboard-access-fab';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -44,6 +45,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <DashboardAccessFab />
           <Footer />
         </Providers>
       </body>

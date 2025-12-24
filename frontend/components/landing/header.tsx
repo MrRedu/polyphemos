@@ -1,11 +1,11 @@
 'use client';
+
 import { NAV_LABELS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
 import { Button } from '../ui/button';
 
 export const Header = () => {
@@ -17,10 +17,6 @@ export const Header = () => {
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
-
-  useEffect(() => {
-    console.log(theme);
-  }, [theme]);
 
   const sharedStyles =
     'fixed z-50 top-3 flex items-center justify-between gap-6 py-6 px-8 shadow-xs bg-white dark:bg-black/30 dark:backdrop-blur-lg max-h-[4.5rem]';

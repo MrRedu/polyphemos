@@ -1,38 +1,61 @@
 'use client';
-import Link from 'next/link';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { Label } from '../ui/label';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Field, FieldGroup, FieldLabel } from '../ui/field';
 
 export const SignInForm = () => {
   return (
-    <>
-      <div className="flex w-full max-w-sm min-w-sm flex-col items-center gap-y-4 rounded-lg border px-6 py-12 bg-white dark:bg-black/30 dark:backdrop-blur-lg">
-        <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input placeholder="Email" required type="email" id="email" />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            placeholder="Password"
-            required
-          />
-        </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Login to your account</CardTitle>
+        <CardDescription>
+          Enter your email below to login to your account
+        </CardDescription>
+      </CardHeader>
 
-        <Button type="submit">Sign in</Button>
-      </div>
-      <div className="flex justify-center gap-1 text-sm text-muted-foreground">
-        <p>Need an account?</p>
-        <Link
-          href="/sign-up"
-          className="font-medium text-primary hover:underline"
-        >
-          Sign up
-        </Link>
-      </div>
-    </>
+      <CardContent>
+        <form>
+          <FieldGroup>
+            <Field className="flex w-full flex-col gap-2">
+              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <Input
+                placeholder="m@example.com"
+                required
+                type="email"
+                id="email"
+              />
+              {/* <FormError error={formState.zodErrors?.<x>} /> */}
+            </Field>
+            <Field className="flex w-full flex-col gap-2">
+              {/* <FieldLabel htmlFor="password">Password</FieldLabel> */}
+              <div className="flex items-center">
+                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <a
+                  href="#"
+                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                >
+                  Forgot your password?
+                </a>
+              </div>
+              <Input id="password" type="password" required />
+              {/* <FormError error={formState.zodErrors?.<x>} /> */}
+            </Field>
+
+            <FieldGroup>
+              <Button type="submit" className="w-full">
+                Sign in
+              </Button>
+            </FieldGroup>
+          </FieldGroup>
+        </form>
+      </CardContent>
+    </Card>
   );
 };

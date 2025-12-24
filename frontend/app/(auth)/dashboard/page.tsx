@@ -1,23 +1,5 @@
+import { DASHBOARD_OPTIONS } from '@/lib/constants';
 import Link from 'next/link';
-
-const DASHBOARD_OPTIONS = [
-  {
-    name: 'Users',
-    url: '/dashboard/users',
-  },
-  {
-    name: 'Articles',
-    url: '/dashboard/articles',
-  },
-  {
-    name: 'Algo',
-    url: '/dashboard/algo',
-  },
-  {
-    name: 'Otro',
-    url: '/dashboard/otro',
-  },
-];
 
 export default function DashboardPage() {
   return (

@@ -4,23 +4,24 @@ import Link from 'next/link';
 
 export default function SignInPage() {
   return (
-    <div className="my-auto flex w-full justify-center">
-      <section className="h-screen w-full">
-        <div className="flex h-full items-center justify-center">
-          <div className="flex flex-col items-center gap-6 lg:justify-start">
-            <Link href="/">
-              {/* <img
-                alt="logo"
-                title=""
-                className="h-10 dark:invert"
-                src=""
-              /> */}
-              <Typography variant="h1">Polyphemos</Typography>
-            </Link>
-            <SignInForm />
-          </div>
-        </div>
-      </section>
-    </div>
+    <section className="flex flex-col gap-4 min-h-svh w-full items-center justify-center p-6 md:p-10 mt-16">
+      <Link href="/">
+        <Typography variant="h1">Polyphemos</Typography>
+      </Link>
+
+      <div className="w-full max-w-md">
+        <SignInForm />
+      </div>
+
+      <div className="flex justify-center gap-1 text-sm text-muted-foreground">
+        <p>Need an account?</p>
+        <Link
+          href="/sign-up"
+          className="font-medium text-primary hover:underline"
+        >
+          Sign up
+        </Link>
+      </div>
+    </section>
   );
 }

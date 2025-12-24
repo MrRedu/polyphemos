@@ -1,8 +1,14 @@
 'use client';
-import Link from 'next/link';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { Label } from '../ui/label';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field';
 
 import { actions } from '@/actions';
 import { useActionState } from 'react';
@@ -28,70 +34,96 @@ export const SignUpForm = () => {
   );
 
   return (
-    <>
-      <form
-        action={formAction}
-        className="flex w-full max-w-sm min-w-sm flex-col items-center gap-y-4 rounded-lg border px-6 py-12 bg-white dark:bg-black/30 dark:backdrop-blur-lg"
-      >
-        <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="username">Username</Label>
-          <Input
-            placeholder="Username"
-            required
-            type="text"
-            id="username"
-            name="username"
-            defaultValue={formState.data?.username}
-          />
-          <FormError error={formState.zodErrors?.username} />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            placeholder="Email"
-            required
-            type="email"
-            id="email"
-            name="email"
-            defaultValue={formState.data?.email}
-          />
-          <FormError error={formState.zodErrors?.email} />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            placeholder="Password"
-            type="password"
-            name="password"
-            required
-            defaultValue={formState.data?.password}
-          />
-          <FormError error={formState.zodErrors?.password} />
-        </div>
-        <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="confirmPassword">Confirm Password</Label>
-          <Input
-            id="confirmPassword"
-            placeholder="Password"
-            type="password"
-            name="confirmPassword"
-            defaultValue={formState.data?.confirmPassword}
-            required
-          />
-          <FormError error={formState.zodErrors?.confirmPassword} />
-        </div>
-        <Button type="submit">Create Account</Button>
-      </form>
-      <div className="flex justify-center gap-1 text-sm text-muted-foreground">
-        <p>Already a user?</p>
-        <Link
-          href="/sign-in"
-          className="font-medium text-primary hover:underline"
-        >
-          Sign in
-        </Link>
-      </div>
-    </>
+    <Card>
+      <CardHeader>
+        <CardTitle>Create an account</CardTitle>
+        <CardDescription>
+          Enter your information below to create your account
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <form action={formAction} className="">
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="username">Username</FieldLabel>
+              <Input
+                placeholder="Username"
+                required
+                type="text"
+                id="username"
+                name="username"
+                defaultValue={formState.data?.username}
+              />
+              <FormError error={formState.zodErrors?.username} />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <Input
+                placeholder="m@example.com"
+                required
+                type="email"
+                id="email"
+                name="email"
+                defaultValue={formState.data?.email}
+              />
+              <FieldDescription>
+                {`We'll use this to contact you. We will not share your email
+                with anyone else.`}
+              </FieldDescription>
+              <FormError error={formState.zodErrors?.email} />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="password">Password</FieldLabel>
+              <Input
+                id="password"
+                type="password"
+                name="password"
+                required
+                defaultValue={formState.data?.password}
+              />
+              {!formState.zodErrors?.password ? (
+                <FieldDescription>
+                  Must be at least 8 characters long.
+                </FieldDescription>
+              ) : (
+                <FormError error={formState.zodErrors?.password} />
+              )}
+            </Field>
+            <Field className="flex w-full flex-col gap-2">
+              <FieldLabel htmlFor="confirmPassword">
+                Confirm Password
+              </FieldLabel>
+              <Input
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                defaultValue={formState.data?.confirmPassword}
+                required
+              />
+              {!formState.zodErrors?.confirmPassword ? (
+                <FieldDescription>
+                  Please confirm your password.
+                </FieldDescription>
+              ) : (
+                <FormError error={formState.zodErrors?.confirmPassword} />
+              )}
+            </Field>
+            {formState.apiErrors && (
+              <div className="text-red-500 text-xs py-2">
+                {formState.apiErrors.message}
+              </div>
+            )}
+            <FieldGroup>
+              <Field>
+                <Button type="submit" className="w-full">
+                  Create Account
+                </Button>
+              </Field>
+            </FieldGroup>
+          </FieldGroup>
+        </form>
+      </CardContent>
+    </Card>
   );
 };

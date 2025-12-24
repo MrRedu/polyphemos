@@ -4,6 +4,17 @@ import { z } from 'zod';
 import { SignUpFormSchema, type FormState } from '@/validations/auth';
 import { registerUserService } from '@/lib/strapi';
 
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
+const cookieConfig = {
+  maxAge: 60 * 60 * 24 * 7, // 1 week
+  path: '/',
+  httpOnly: true,
+  domain: process.env.HOST ?? 'localhost',
+  secure: process.env.NODE_ENV === 'production',
+};
+
 export async function registerUserAction(
   prevState: FormState,
   formData: FormData
@@ -20,7 +31,7 @@ export async function registerUserAction(
   if (!validatedFields.success) {
     const flattenedErrors = z.flattenError(validatedFields.error);
 
-    console.log(flattenedErrors);
+    // console.log(flattenedErrors);
     return {
       success: false,
       message: 'Validation failed',
@@ -33,10 +44,10 @@ export async function registerUserAction(
     };
   }
 
-  console.log('Validation successful');
+  // console.log('Validation successful');
 
   const response = await registerUserService(validatedFields.data);
-  console.log(response, 'response');
+  // console.log(response, 'response');
   if (!response || response.error) {
     return {
       success: false,
@@ -50,16 +61,7 @@ export async function registerUserAction(
     };
   }
 
-  console.log('Registration successful');
-
-  return {
-    success: true,
-    message: 'Validation successful',
-    apiErrors: null,
-    zodErrors: null,
-    data: {
-      ...prevState.data,
-      ...fields,
-    },
-  };
+  const cookieStore = await cookies();
+  cookieStore.set('jwt', response.jwt, cookieConfig);
+  redirect('/dashboard');
 }

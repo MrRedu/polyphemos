@@ -33,3 +33,22 @@ export const NAV_LABELS = [
     href: '?label=IA',
   },
 ];
+
+export const DASHBOARD_OPTIONS = [
+  {
+    name: 'Users',
+    url: '/dashboard/users',
+  },
+  {
+    name: 'Articles',
+    url: '/dashboard/articles',
+  },
+  {
+    name: 'Algo',
+    url: '/dashboard/algo',
+  },
+  {
+    name: 'Otro',
+    url: '/dashboard/otro',
+  },
+];

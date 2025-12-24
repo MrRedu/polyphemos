@@ -16,7 +16,7 @@ interface CardPostProps {
 export const CardPost = ({
   title,
   summary,
-  label,
+  // label,
   author,
   published,
   url,

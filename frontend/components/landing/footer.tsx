@@ -21,20 +21,20 @@ export const Footer = () => {
                 href="mailto:mr.redu.dev@gmail.com"
                 className="flex items-center gap-2 text-base text-muted-foreground transition-colors hover:text-primary md:text-lg"
               >
-                mr.redu.dev@gmail.com
+                {`mr.redu.dev@gmail.com`}
                 <ArrowUpRight size={16} />
               </Link>
             </div>
 
             <div className="flex flex-col items-start gap-4">
               <h3 className="text-sm font-medium tracking-wide text-primary uppercase">
-                Phone
+                GitHub
               </h3>
               <a
-                href="tel:+1234567890"
+                href="https://github.com/MrRedu/"
                 className="flex items-center gap-2 text-base text-muted-foreground transition-colors hover:text-primary md:text-lg"
               >
-                (123) 456 789
+                {`@MrRedu`}
                 <ArrowUpRight size={16} />
               </a>
             </div>
@@ -46,6 +46,7 @@ export const Footer = () => {
               <Link
                 key={`${link.href}-${index}`}
                 href={link.href}
+                target={link.target || undefined}
                 className="text-sm text-muted-foreground transition-colors hover:text-primary"
               >
                 {link.label}
@@ -53,7 +54,7 @@ export const Footer = () => {
             ))}
           </nav>
           <div className="text-sm text-muted-foreground md:text-right md:text-xs">
-            Designed in <strong>San Francisco</strong>
+            Made with <strong>❤️</strong>
           </div>
         </div>
       </div>

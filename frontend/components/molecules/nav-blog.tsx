@@ -13,27 +13,19 @@ import { MoveRight, SearchIcon } from 'lucide-react';
 import { Input } from '../ui/input';
 import { Kbd } from '../ui/kbd';
 import Link from 'next/link';
-
-const LABELS = [
-  {
-    label: 'Desarrollo',
-    href: '#desarrollo',
-  },
-  {
-    label: 'Diseño',
-    href: '#diseño',
-  },
-  {
-    label: 'IA',
-    href: '#ia',
-  },
-];
+import { Label } from '@/types/types';
+import { cn } from '@/lib/utils';
+import { NAV_LABELS } from '@/lib/constants';
 
 interface NavBlogProps {
   availableArticleTitles: { title: string; slug: string }[];
+  activeLabel: Label;
 }
 
-export const NavBlog = ({ availableArticleTitles }: NavBlogProps) => {
+export const NavBlog = ({
+  availableArticleTitles,
+  activeLabel,
+}: NavBlogProps) => {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -51,13 +43,25 @@ export const NavBlog = ({ availableArticleTitles }: NavBlogProps) => {
       <nav className="w-full flex md:flex-row flex-col gap-2 items-center justify-between">
         <ul className="flex gap-4 text-muted-foreground font-medium">
           <li>
-            <Link href="#all" className="font-bold">
+            <Link
+              href="?label=Todos"
+              className={cn('', {
+                'font-bold': activeLabel === 'Todos',
+              })}
+            >
               Todos
             </Link>
           </li>
-          {LABELS.map((label) => (
+          {NAV_LABELS.map((label) => (
             <li key={label.label}>
-              <Link href={label.href}>{label.label}</Link>
+              <Link
+                href={label.href}
+                className={cn('', {
+                  'font-bold': activeLabel === label.label,
+                })}
+              >
+                {label.label}
+              </Link>
             </li>
           ))}
         </ul>

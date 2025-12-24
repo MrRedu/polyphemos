@@ -55,6 +55,8 @@ export function getTableOfContents(content: BlocksContent) {
     ?.filter((node) => node.type === 'heading')
     .map((heading) => {
       // Extraemos el texto plano de los hijos del heading
+      // 👀
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const text = heading.children.map((child: any) => child.text).join('');
 
       // Generamos el ID (slug)

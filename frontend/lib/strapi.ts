@@ -7,8 +7,8 @@ import {
   QUERY_BLOG_PAGE,
   QUERY_HOME_PAGE,
 } from './queries';
-
-export const STRAPI_BASE_URL = 'http://localhost:1337';
+import { Label } from '@/types/types';
+import { API_BASE_URL } from './constants';
 
 export async function getArticleById(id: string) {
   // 'use cache';
@@ -16,21 +16,37 @@ export async function getArticleById(id: string) {
 
   const query = qs.stringify(QUERY_ARTICLE_BY_ID);
   const response = await getStrapiData(
-    // /api/articles?filters[slug][$eq]=el-futuro-de-la-ia-generativa-mas-alla-de-los-chatbots&populate=*
     `/api/articles?filters[slug][$eq]=${id}&${query}`
   );
 
   return response?.data?.[0];
 }
 
-export async function getArticles({ page = 1 }: { page?: number }) {
-  const query = qs.stringify({
+export async function getArticles({
+  page = 1,
+  label = null,
+}: {
+  page?: number;
+  label?: Label | null;
+}) {
+  const queryObj = {
     ...QUERY_ARTICLES,
     pagination: {
       page: page,
       pageSize: 13,
     },
-  });
+    filters: {},
+  };
+
+  if (label && label !== 'Todos') {
+    queryObj.filters = {
+      label: {
+        $eq: label,
+      },
+    };
+  }
+
+  const query = qs.stringify(queryObj);
   const response = await getStrapiData(`/api/articles?${query}`);
   return {
     articles: response?.data || [],
@@ -58,12 +74,70 @@ export async function getHomePage() {
 
 export async function getStrapiData(url: string) {
   try {
-    const response = await fetch(`${STRAPI_BASE_URL}${url}`);
+    const response = await fetch(`${API_BASE_URL}${url}`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     return data;
   } catch (error) {
     console.error('Error fetching data', error);
+    return null;
+  }
+}
+
+export async function registerUserService(userData: {
+  username: string;
+  email: string;
+  password: string;
+}) {
+  const URL = `${API_BASE_URL}/api/auth/local/register`;
+
+  const payload = {
+    username: userData.username,
+    email: userData.email,
+    password: userData.password,
+  };
+
+  try {
+    const response = await fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error registering user', error);
+    return null;
+  }
+}
+
+export async function loginUserService(userData: {
+  identifier: string;
+  password: string;
+}) {
+  const URL = `${API_BASE_URL}/api/auth/local`;
+
+  const payload = {
+    identifier: userData.identifier,
+    password: userData.password,
+  };
+
+  try {
+    const response = await fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error logging user', error);
     return null;
   }
 }

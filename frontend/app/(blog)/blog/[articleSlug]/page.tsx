@@ -1,10 +1,11 @@
 import { NavArticle } from '@/components/molecules/nav-article';
 import { BlockRendererClient } from '@/components/organisms/block-renderer-client';
-import { getArticleById, STRAPI_BASE_URL } from '@/lib/strapi';
+import { getArticleById } from '@/lib/strapi';
 import { calculateReadingMinutes, formatDate } from '@/lib/utils';
 import { Article } from '@/types/types';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/lib/constants';
 
 interface ArticlePageProps {
   params: {
@@ -25,19 +26,19 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleSlug } = await params;
   const article: Article = await getArticleById(articleSlug);
-  const imageUrl = `${STRAPI_BASE_URL}${article?.cover?.url}`;
+  const imageUrl = `${API_BASE_URL}${article?.cover?.url}`;
   const readingMinutes = calculateReadingMinutes(article.content);
 
   if (!article) return notFound();
 
   return (
-    <div className="my-auto flex w-full justify-center ">
+    <div className="my-auto flex w-full justify-center">
       <section className="pb-32 w-full">
         {/* Hero */}
         <div
           className={`
             bg-muted bg-cover bg-repeat py-4 relative min-h-svh grid items-center
-            before:content-[''] before:absolute before:inset-0 before:bg-white/30 before:backdrop-blur-xs before:z-0
+            before:content-[''] before:absolute before:inset-0 before:bg-white/30 dark:before:bg-black/30 before:backdrop-blur-xs before:z-0
             `}
           style={{ backgroundImage: `url('${imageUrl}')` }}
         >

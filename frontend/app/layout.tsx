@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/providers';
+import { Header, Footer } from '@/components/landing';
+import { DashboardAccessFab } from '@/components/molecules/dashboard-access-fab';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -27,11 +29,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} antialiased bg-[#f7f7f7]`}>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <body
+        className={`${inter.variable} antialiased 
+      bg-[#f7f7f7] dark:bg-[#121212]
+      `}
+      >
         {/* Background dots */}
-        <div className="fixed inset-0 bg-[radial-gradient(circle,#73737350_1px,transparent_1px)] bg-[size:16px_16px] -z-10" />
-        <Providers>{children}</Providers>
+        <div
+          className="
+        fixed inset-0 bg-size-[16px_16px] -z-10
+        bg-[radial-gradient(circle,#73737350_1px,transparent_1px)] 
+        "
+        />
+        <Providers>
+          <Header />
+          {children}
+          <DashboardAccessFab />
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

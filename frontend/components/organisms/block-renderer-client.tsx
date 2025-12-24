@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { Typography } from '../ui/typography';
 import Link from 'next/link';
@@ -17,7 +18,12 @@ export const BlockRendererClient = ({
       content={content}
       blocks={{
         heading: ({ children, level }) => {
-          const headingId = slugify(children![0].props.text);
+          // 👀
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const childrenArray = React.Children.toArray(children) as any[];
+          const textContent = childrenArray[0]?.props?.text || '';
+          const headingId = slugify(textContent);
+
           switch (level) {
             case 1:
               return (

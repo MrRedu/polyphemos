@@ -1,4 +1,6 @@
-import { Header, Footer } from '@/components/landing';
+'use client';
+
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -6,10 +8,14 @@ interface ProvidersProps {
 
 export const Providers = ({ children }: ProvidersProps) => {
   return (
-    <>
-      <Header />
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      
       {children}
-      <Footer />
-    </>
+    </NextThemesProvider>
   );
 };

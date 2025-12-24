@@ -23,7 +23,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     label: label as Label,
   });
 
-  console.log(label);
+  // console.log(label);
 
   return (
     <>

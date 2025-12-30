@@ -41,7 +41,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col gap-6 py-6 md:flex-row md:items-center md:justify-between md:py-4">
-          <nav className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
+          <nav className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {FOOTER_LINKS.map((link, index) => (
               <Link
                 key={`${link.href}-${index}`}

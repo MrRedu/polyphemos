@@ -1,6 +1,5 @@
-import { API_BASE_URL } from '@/lib/constants';
-import { cn, formatDate } from '@/lib/utils';
 import type { Article } from '@/types/types';
+import { cn, formatDate } from '@/lib/utils';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -30,7 +29,7 @@ export const CardArticle = ({
         )}
       >
         <img
-          src={`${API_BASE_URL}${imageUrl}`}
+          src={imageUrl}
           alt={title}
           className="w-full h-full min-h-full object-cover group-hover:scale-102 duration-200 ease-in"
         />

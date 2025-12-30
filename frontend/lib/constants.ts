@@ -3,7 +3,7 @@ export const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:1337';
 
 export const FOOTER_LINKS = [
   {
-    label: 'Home',
+    label: 'Inicio',
     href: '/',
   },
   // {
@@ -11,16 +11,16 @@ export const FOOTER_LINKS = [
   //   href: '#',
   // },
   {
-    label: 'Manage',
+    label: 'Gestión',
     href: '/sign-in',
   },
   {
-    label: 'Contact',
+    label: 'Contacto',
     href: 'https://www.linkedin.com/in/mrredu/',
     target: '_blank',
   },
   {
-    label: 'Privacy',
+    label: 'Políticas de privacidad',
     href: '#',
   },
 ];

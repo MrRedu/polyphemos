@@ -12,6 +12,7 @@ import { Field, FieldGroup, FieldLabel } from '../ui/field';
 import { actions } from '@/actions';
 import { useActionState } from 'react';
 import { FormError } from '../atoms/form-error';
+import Link from 'next/link';
 
 const INITIAL_STATE = {
   success: undefined,
@@ -58,12 +59,12 @@ export const SignInForm = () => {
               {/* <FieldLabel htmlFor="password">Password</FieldLabel> */}
               <div className="flex items-center">
                 <FieldLabel htmlFor="password">Password</FieldLabel>
-                <a
+                <Link
                   href="#"
                   className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </div>
               <Input id="password" type="password" required name="password" />
               <FormError error={formState.zodErrors?.password} />

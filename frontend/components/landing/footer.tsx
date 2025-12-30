@@ -15,7 +15,7 @@ export const Footer = () => {
           <div className="mb-12 flex flex-col gap-8 md:mb-16 lg:flex-row lg:justify-between lg:gap-4 xl:gap-8">
             <div className="flex flex-col items-start gap-4">
               <h3 className="text-sm font-medium tracking-wide text-primary uppercase">
-                Email
+                {`Correo electrónico`}
               </h3>
               <Link
                 href="mailto:mr.redu.dev@gmail.com"
@@ -30,13 +30,13 @@ export const Footer = () => {
               <h3 className="text-sm font-medium tracking-wide text-primary uppercase">
                 GitHub
               </h3>
-              <a
+              <Link
                 href="https://github.com/MrRedu/"
                 className="flex items-center gap-2 text-base text-muted-foreground transition-colors hover:text-primary md:text-lg"
               >
                 {`@MrRedu`}
                 <ArrowUpRight size={16} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@ export const Footer = () => {
             ))}
           </nav>
           <div className="text-sm text-muted-foreground md:text-right md:text-xs">
-            Made with <strong>❤️</strong>
+            Hecho con <strong>❤️</strong>
           </div>
         </div>
       </div>

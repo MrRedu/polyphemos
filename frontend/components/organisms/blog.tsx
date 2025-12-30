@@ -41,13 +41,11 @@ export const Blog = ({
     setPagination(meta);
     setLoading(false);
   };
+
   const availableArticleTitles = articles.map((article) => {
     return { title: article.title, slug: article.slug };
   });
-
   const hasMore = pagination.page < pagination.pageCount;
-
-  console.log(ENVIRONMENT);
 
   return (
     <section className={cn('py-32 px-2', className)}>

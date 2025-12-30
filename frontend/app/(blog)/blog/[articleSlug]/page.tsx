@@ -20,6 +20,20 @@ export async function generateMetadata({ params }: ArticlePageProps) {
   return {
     title: article.title,
     description: article.summary,
+    openGraph: {
+      title: article.title,
+      description: article.summary,
+      images: [
+        {
+          url: article.cover?.url,
+          width: 800,
+          height: 600,
+          alt: article.title,
+        },
+      ],
+      siteName: 'Polyphemos',
+      type: 'website',
+    },
   };
 }
 
@@ -50,9 +64,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <div className="flex w-full flex-col items-center justify-center gap-12 ">
               <div className="flex w-full max-w-[42rem] flex-col items-center justify-center gap-8">
                 <nav>
-                  <Link href="#">{article.label}</Link>
+                  <Link href={`/?label=${article.label}`}>{article.label}</Link>
                   {` / `}
-                  <Link href="/blog">Blog</Link>
+                  <Link href="/">Blog</Link>
                 </nav>
                 <div className="flex w-full flex-col gap-5">
                   <div className="flex items-center justify-center gap-2.5 text-sm font-medium text-foreground/60">
@@ -67,9 +81,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   <p className="text-center text-xl leading-[1.4] font-semibold text-foreground">
                     {article.summary}
                   </p>
-                  <div className="flex items-center justify-center gap-2.5">
+                  {/* <div className="flex items-center justify-center gap-2.5">
                     Redes
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

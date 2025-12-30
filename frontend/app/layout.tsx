@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     'Polyphemos es tu fuente definitiva para todo lo relacionado con la programación y el desarrollo web. En Polyphemos, nos apasiona explorar y aprender sobre el desarrollo de productos digitales innovadores, especialmente en el ámbito web.',
   keywords: ['desarrollo web', 'programación web', 'front-end'],
   authors: [{ name: 'Eduardo', url: 'https://github.com/MrRedu' }],
-  creator: 'Eduardo',
+  creator: '@MrRedu',
   category: 'technology',
 };
 

@@ -5,7 +5,7 @@ import { calculateReadingMinutes, formatDate } from '@/lib/utils';
 import { Article } from '@/types/types';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { API_BASE_URL } from '@/lib/constants';
+import { API_BASE_URL, ENVIRONMENT } from '@/lib/constants';
 
 interface ArticlePageProps {
   params: {
@@ -26,7 +26,11 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleSlug } = await params;
   const article: Article = await getArticleById(articleSlug);
-  const imageUrl = `${API_BASE_URL}${article?.cover?.url}`;
+  const imageUrl =
+    ENVIRONMENT === 'development'
+      ? `${API_BASE_URL}${article.cover?.url}`
+      : article.cover?.url;
+
   const readingMinutes = calculateReadingMinutes(article.content);
 
   if (!article) return notFound();

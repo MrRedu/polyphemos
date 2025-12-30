@@ -1,14 +1,15 @@
 'use client';
 
+import type { Article, Label, MetaResponse } from '@/types/types';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import type { Article, Label, MetaResponse } from '@/types/types';
 import { NavBlog } from '@/components/molecules/nav-blog';
 import { CardArticle } from '@/components/molecules/card-article';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { getArticles } from '@/lib/strapi';
 import { AnimatedGroup } from '@/components/ui/animated-group';
+import { API_BASE_URL, ENVIRONMENT } from '@/lib/constants';
 
 interface BlogProps {
   initialArticles: Article[];
@@ -46,6 +47,8 @@ export const Blog = ({
 
   const hasMore = pagination.page < pagination.pageCount;
 
+  console.log(ENVIRONMENT);
+
   return (
     <section className={cn('py-32 px-2', className)}>
       <div className="container flex flex-col items-center gap-8 mx-auto w-full">
@@ -65,7 +68,11 @@ export const Blog = ({
               summary={article.summary}
               author={article.author}
               published={article.published}
-              imageUrl={article.cover?.url}
+              imageUrl={
+                ENVIRONMENT === 'development'
+                  ? `${API_BASE_URL}${article.cover?.url}`
+                  : article.cover?.url
+              }
             />
           ))}
         </AnimatedGroup>
@@ -82,7 +89,11 @@ export const Blog = ({
               summary={article.summary}
               author={article.author}
               published={article.published}
-              imageUrl={article.cover?.url}
+              imageUrl={
+                ENVIRONMENT === 'development'
+                  ? `${API_BASE_URL}${article.cover?.url}`
+                  : article.cover?.url
+              }
               isSecondary
             />
           ))}

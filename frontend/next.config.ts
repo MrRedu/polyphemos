@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next';
-import { API_BASE_URL, ENVIRONMENT } from './lib/constants';
+import { API_MEDIA_BASE_URL, ENVIRONMENT } from './lib/constants';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -10,7 +10,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: ENVIRONMENT === 'development' ? 'http' : 'https',
-        hostname: new URL(API_BASE_URL).hostname,
+        hostname: new URL(API_MEDIA_BASE_URL).hostname,
+        port: '',
+        pathname: '/**',
       },
     ],
   },

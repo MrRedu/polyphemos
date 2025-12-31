@@ -1,5 +1,5 @@
 import { Blog } from '@/components/organisms/blog';
-import { getBlogPage, getArticles } from '@/lib/strapi';
+import { getHomePage, getArticles } from '@/lib/strapi';
 import type { Label } from '@/types/types';
 
 interface HomePageProps {
@@ -9,10 +9,10 @@ interface HomePageProps {
 }
 
 export async function generateMetadata() {
-  const blogPage = await getBlogPage();
+  const homePage = await getHomePage();
   return {
-    title: blogPage?.title || 'Blog',
-    description: blogPage?.description || undefined,
+    title: homePage?.title || 'Blog',
+    description: homePage?.description,
   };
 }
 
@@ -22,8 +22,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     page: 1,
     label: label as Label,
   });
-
-  // console.log(label);
 
   return (
     <>

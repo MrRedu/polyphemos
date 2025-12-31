@@ -16,11 +16,13 @@ export const metadata: Metadata = {
     template: '%s | Polyphemos',
     default: 'Polyphemos',
   },
+  authors: [
+    { name: '(Mr Redu) - Eduardo R.', url: 'https://github.com/MrRedu' },
+  ],
+  creator: 'Mr Redu',
   description:
     'Polyphemos es tu fuente definitiva para todo lo relacionado con la programación y el desarrollo web. En Polyphemos, nos apasiona explorar y aprender sobre el desarrollo de productos digitales innovadores, especialmente en el ámbito web.',
   keywords: ['desarrollo web', 'programación web', 'front-end'],
-  authors: [{ name: 'Eduardo', url: 'https://github.com/MrRedu' }],
-  creator: '@MrRedu',
   category: 'technology',
 };
 

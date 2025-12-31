@@ -30,6 +30,12 @@ export async function generateMetadata({ params }: ArticlePageProps) {
           height: 600,
           alt: article.title,
         },
+        {
+          url: article.cover?.url,
+          width: 1800,
+          height: 1600,
+          alt: article.title,
+        },
       ],
       siteName: 'Polyphemos',
       type: 'website',

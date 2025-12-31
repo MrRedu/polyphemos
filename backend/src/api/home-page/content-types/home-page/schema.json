@@ -19,11 +19,6 @@
       "type": "text",
       "minLength": 3,
       "maxLength": 500
-    },
-    "blogSection": {
-      "type": "component",
-      "component": "layout.blog-section",
-      "repeatable": false
     }
   }
 }

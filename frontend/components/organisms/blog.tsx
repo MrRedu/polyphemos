@@ -68,7 +68,7 @@ export const Blog = ({
               published={article.published}
               imageUrl={
                 ENVIRONMENT === 'development'
-                  ? `${API_BASE_URL}${article.cover?.url}`
+                  ? `${API_BASE_URL}${article.cover?.url || ''}`
                   : article.cover?.url
               }
             />
@@ -89,7 +89,7 @@ export const Blog = ({
               published={article.published}
               imageUrl={
                 ENVIRONMENT === 'development'
-                  ? `${API_BASE_URL}${article.cover?.url}`
+                  ? `${API_BASE_URL}${article.cover?.url || ''}`
                   : article.cover?.url
               }
               isSecondary

@@ -48,7 +48,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const article: Article = await getArticleById(articleSlug);
   const imageUrl =
     ENVIRONMENT === 'development'
-      ? `${API_BASE_URL}${article.cover?.url}`
+      ? `${API_BASE_URL}${article.cover?.url || ''}`
       : article.cover?.url;
 
   const readingMinutes = calculateReadingMinutes(article.content);

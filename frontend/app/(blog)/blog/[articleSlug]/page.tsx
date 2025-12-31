@@ -30,6 +30,12 @@ export async function generateMetadata({ params }: ArticlePageProps) {
           height: 600,
           alt: article.title,
         },
+        {
+          url: article.cover?.url,
+          width: 1800,
+          height: 1600,
+          alt: article.title,
+        },
       ],
       siteName: 'Polyphemos',
       type: 'website',
@@ -101,9 +107,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <div className="">
                 <BlockRendererClient content={article?.content} />
               </div>
-              {/* <pre className="whitespace-pre-wrap">
+              <pre className="whitespace-pre-wrap">
                 {JSON.stringify(article, null, 2)}
-              </pre> */}
+              </pre>
             </div>
           </div>
         </div>

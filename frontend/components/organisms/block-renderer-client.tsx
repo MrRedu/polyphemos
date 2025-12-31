@@ -5,6 +5,7 @@ import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { Typography } from '../ui/typography';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
+import Image from 'next/image';
 
 export const BlockRendererClient = ({
   content,
@@ -78,18 +79,15 @@ export const BlockRendererClient = ({
         code: ({ children }) => (
           <Typography variant="code">{children}</Typography>
         ),
-        image: ({ image }) => {
-          // console.log(image);
-          return (
-            // <Image
-            //   src={image.url}
-            //   width={image.width}
-            //   height={image.height}
-            //   alt={image.alternativeText || ''}
-            // />
-            <img src={image.url} alt={image.alternativeText || ''} />
-          );
-        },
+        image: ({ image }) => (
+          <Image
+            src={image.url}
+            width={image.width}
+            height={image.height}
+            alt={image.alternativeText || ''}
+            className="w-full h-full min-h-full object-cover"
+          />
+        ),
         link: ({ children, url }) => (
           <Link
             href={url || '#'}

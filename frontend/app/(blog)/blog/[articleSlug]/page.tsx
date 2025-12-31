@@ -1,11 +1,15 @@
 import { NavArticle } from '@/components/molecules/nav-article';
 import { BlockRendererClient } from '@/components/organisms/block-renderer-client';
 import { getArticleById } from '@/lib/strapi';
-import { calculateReadingMinutes, formatDate } from '@/lib/utils';
+import {
+  calculateReadingMinutes,
+  formatDate,
+  getStrapiMedia,
+  pluralizeWord,
+} from '@/lib/utils';
 import { Article } from '@/types/types';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { API_BASE_URL, ENVIRONMENT } from '@/lib/constants';
 
 interface ArticlePageProps {
   params: {
@@ -46,11 +50,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleSlug } = await params;
   const article: Article = await getArticleById(articleSlug);
-  const imageUrl =
-    ENVIRONMENT === 'development'
-      ? `${API_BASE_URL}${article.cover?.url || ''}`
-      : article.cover?.url;
-
+  const imageUrl = getStrapiMedia(article.cover?.url || '');
   const readingMinutes = calculateReadingMinutes(article.content);
 
   if (!article) return notFound();
@@ -62,29 +62,44 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <div
           className={`
             bg-muted bg-cover bg-repeat py-4 relative min-h-svh grid items-center
-            before:content-[''] before:absolute before:inset-0 before:bg-white/30 dark:before:bg-black/30 before:backdrop-blur-xs before:z-0
+            before:content-[''] before:absolute before:inset-0 before:bg-white/30 dark:before:bg-black/60 before:backdrop-blur-xs before:z-0
             `}
-          style={{ backgroundImage: `url('${imageUrl}')` }}
+          style={{
+            backgroundImage: `url('${
+              imageUrl || '/placeholder/placeholder-1920x1080.webp'
+            }')`,
+          }}
         >
           <div className="container relative z-10 flex flex-col items-start justify-start gap-16 py-20 lg:flex-row lg:items-end lg:justify-between mx-auto px-8">
             <div className="flex w-full flex-col items-center justify-center gap-12 ">
-              <div className="flex w-full max-w-[42rem] flex-col items-center justify-center gap-8">
-                <nav>
-                  <Link href={`/?label=${article.label}`}>{article.label}</Link>
+              <div className="flex w-full max-w-[42rem] flex-col items-center justify-center gap-6">
+                <nav className="text-sm font-medium text-foreground/60">
+                  <Link
+                    href={`/?label=${article.label}`}
+                    className="hover:underline"
+                  >
+                    {article.label}
+                  </Link>
                   {` / `}
-                  <Link href="/">Blog</Link>
+                  <Link href="/" className="hover:underline">
+                    Blog
+                  </Link>
                 </nav>
                 <div className="flex w-full flex-col gap-5">
                   <div className="flex items-center justify-center gap-2.5 text-sm font-medium text-foreground/60">
-                    <div>{readingMinutes} min read </div>
+                    <div>
+                      {readingMinutes}{' '}
+                      {pluralizeWord(readingMinutes, 'minuto', 'minutos')} de
+                      lectura
+                    </div>
                     <div>{` | `}</div>
                     {/* <div>May 18, 2025</div> */}
                     <div>{formatDate(article.published)}</div>
                   </div>
-                  <h1 className="text-center text-[2.5rem] leading-[1.2] font-semibold md:text-5xl lg:text-6xl">
+                  <h1 className="text-primary text-center text-[2.5rem] leading-[1.2] font-semibold md:text-5xl lg:text-6xl">
                     {article.title}
                   </h1>
-                  <p className="text-center text-xl leading-[1.4] font-semibold text-foreground">
+                  <p className="text-center text-xl leading-[1.4] font-semibold text-foreground/60">
                     {article.summary}
                   </p>
                   {/* <div className="flex items-center justify-center gap-2.5">

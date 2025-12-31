@@ -9,7 +9,6 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { getArticles } from '@/lib/strapi';
 import { AnimatedGroup } from '@/components/ui/animated-group';
-import { API_BASE_URL, ENVIRONMENT } from '@/lib/constants';
 
 interface BlogProps {
   initialArticles: Article[];
@@ -66,11 +65,7 @@ export const Blog = ({
               summary={article.summary}
               author={article.author}
               published={article.published}
-              imageUrl={
-                ENVIRONMENT === 'development'
-                  ? `${API_BASE_URL}${article.cover?.url || ''}`
-                  : article.cover?.url
-              }
+              imageUrl={article.cover?.url}
             />
           ))}
         </AnimatedGroup>
@@ -89,11 +84,7 @@ export const Blog = ({
                   summary={article.summary}
                   author={article.author}
                   published={article.published}
-                  imageUrl={
-                    ENVIRONMENT === 'development'
-                      ? `${API_BASE_URL}${article.cover?.url || ''}`
-                      : article.cover?.url
-                  }
+                  imageUrl={article.cover?.url}
                   isSecondary
                 />
               ))}

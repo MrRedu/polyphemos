@@ -1,6 +1,7 @@
 import { BlocksContent } from '@strapi/blocks-react-renderer';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { API_MEDIA_BASE_URL } from '@/lib/constants';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -68,4 +69,32 @@ export function getTableOfContents(content: BlocksContent) {
         level: heading.level, // 1, 2, 3, etc.
       };
     });
+}
+
+export const getStrapiMedia = (url: string) => {
+  if (!url) return null;
+  // Si la URL ya es absoluta (empieza por http), viene de Strapi Cloud
+  if (url.startsWith('http')) return url;
+  // Si es relativa, viene de tu entorno local
+  return `${API_MEDIA_BASE_URL}${url}`;
+};
+
+/**
+ * Pluralize a word based on the given count.
+ * If the count is 1, return the singular form. // e.g: minute
+ * If a plural form is provided, return it.     // e.g: miNuTeSss
+ * Otherwise, add an 's' to the singular form.  // e.g: minutes
+ * @param {number} count - The count to pluralize the word by.
+ * @param {string} singular - The singular form of the word.
+ * @param {string} [plural] - The plural form of the word.
+ * @returns {string} The pluralized word.
+ */
+export function pluralizeWord(
+  count: number,
+  singular: string,
+  plural: string
+): string {
+  if (count === 1) return singular;
+  if (plural) return plural;
+  return `${singular}s`;
 }

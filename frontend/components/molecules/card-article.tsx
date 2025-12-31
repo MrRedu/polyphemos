@@ -2,7 +2,7 @@ import type { Article } from '@/types/types';
 import { cn, formatDate } from '@/lib/utils';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+import StrapiImage from '../atoms/strapi-image';
 
 interface CardArticleProps
   extends Pick<Article, 'slug' | 'title' | 'summary' | 'author' | 'published'> {
@@ -29,12 +29,11 @@ export const CardArticle = ({
           }
         )}
       >
-        <Image
-          src={imageUrl}
+        <StrapiImage
+          src={imageUrl || ''}
           alt={title}
           width={500}
           height={500}
-          // placeholder="blur"
           className="w-full h-full min-h-full object-cover group-hover:scale-102 duration-200 ease-in"
         />
       </div>

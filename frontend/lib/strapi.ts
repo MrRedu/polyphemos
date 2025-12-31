@@ -4,7 +4,6 @@ import qs from 'qs';
 import {
   QUERY_ARTICLE_BY_ID,
   QUERY_ARTICLES,
-  QUERY_BLOG_PAGE,
   QUERY_HOME_PAGE,
 } from './queries';
 import { Label } from '@/types/types';
@@ -52,15 +51,6 @@ export async function getArticles({
     articles: response?.data || [],
     meta: response?.meta?.pagination || {},
   };
-}
-
-export async function getBlogPage() {
-  // 'use cache';
-  // cacheLife({ expire: 60 * 15 });
-
-  const query = qs.stringify(QUERY_BLOG_PAGE);
-  const response = await getStrapiData(`/api/blog-page?${query}`);
-  return response?.data;
 }
 
 export async function getHomePage() {

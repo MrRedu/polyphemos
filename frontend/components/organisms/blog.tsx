@@ -1,14 +1,13 @@
 'use client';
 
 import type { Article, Label, MetaResponse } from '@/types/types';
-import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { NavBlog } from '@/components/molecules/nav-blog';
 import { CardArticle } from '@/components/molecules/card-article';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
-import { getArticles } from '@/lib/strapi';
 import { AnimatedGroup } from '@/components/ui/animated-group';
+import { useBlog } from '@/hooks/use-blog';
 
 interface BlogProps {
   initialArticles: Article[];
@@ -23,28 +22,14 @@ export const Blog = ({
   currentLabel,
   className,
 }: BlogProps) => {
-  const [articles, setArticles] = useState(initialArticles);
-  const [pagination, setPagination] = useState(initialMeta);
-  const [loading, setLoading] = useState(false);
-
-  const handleLoadMore = async () => {
-    const nextPage = pagination.page + 1;
-    setLoading(true);
-
-    const { articles: newArticles, meta } = await getArticles({
-      page: nextPage,
-      label: currentLabel,
-    });
-
-    setArticles((prev) => [...prev, ...newArticles]);
-    setPagination(meta);
-    setLoading(false);
-  };
-
-  const availableArticleTitles = articles.map((article) => {
-    return { title: article.title, slug: article.slug };
-  });
-  const hasMore = pagination.page < pagination.pageCount;
+  const {
+    articles,
+    // pagination,
+    loading,
+    handleLoadMore,
+    availableArticleTitles,
+    hasMore,
+  } = useBlog({ initialArticles, initialMeta, currentLabel });
 
   return (
     <section className={cn('py-32 px-2', className)}>

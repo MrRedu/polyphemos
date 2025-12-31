@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const SignInFormSchema = z.object({
   identifier: z
@@ -8,7 +8,7 @@ export const SignInFormSchema = z.object({
     .string()
     .min(8, { message: 'Password must be at least 8 characters' })
     .max(100, { message: 'Password must be at most 100 characters' }),
-});
+})
 
 export const SignUpFormSchema = z
   .object({
@@ -26,35 +26,35 @@ export const SignUpFormSchema = z
       .max(100, { message: 'Password must be at most 100 characters' }),
     confirmPassword: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine(data => data.password === data.confirmPassword, {
     message: 'Passwords do not match',
     path: ['confirmPassword'],
-  });
+  })
 
-export type SignUpFormValues = z.infer<typeof SignUpFormSchema>;
-export type SignInFormSchema = z.infer<typeof SignInFormSchema>;
+export type SignUpFormValues = z.infer<typeof SignUpFormSchema>
+export type SignInFormSchema = z.infer<typeof SignInFormSchema>
 
 export type FormState = {
-  success?: boolean;
-  message?: string;
+  success?: boolean
+  message?: string
   data?: {
-    identifier?: string;
-    username?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-  };
+    identifier?: string
+    username?: string
+    email?: string
+    password?: string
+    confirmPassword?: string
+  }
   apiErrors?: {
-    status: number;
-    name: string;
-    message: string;
-    details?: Record<string, string[]>;
-  } | null;
+    status: number
+    name: string
+    message: string
+    details?: Record<string, string[]>
+  } | null
   zodErrors?: {
-    identifier?: string[];
-    username?: string[];
-    email?: string[];
-    password?: string[];
-    confirmPassword?: string[];
-  } | null;
-};
+    identifier?: string[]
+    username?: string[]
+    email?: string[]
+    password?: string[]
+    confirmPassword?: string[]
+  } | null
+}

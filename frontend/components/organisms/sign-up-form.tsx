@@ -1,19 +1,19 @@
-'use client';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
+'use client'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field';
+} from '@/components/ui/card'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field'
 
-import { actions } from '@/actions';
-import { useActionState } from 'react';
-import { type FormState } from '@/validations/auth';
-import { FormError } from '../atoms/form-error';
+import { actions } from '@/actions'
+import { useActionState } from 'react'
+import { type FormState } from '@/validations/auth'
+import { FormError } from '../atoms/form-error'
 
 const INITIAL_STATE: FormState = {
   success: undefined,
@@ -25,13 +25,13 @@ const INITIAL_STATE: FormState = {
     email: '',
     password: '',
   },
-};
+}
 
 export const SignUpForm = () => {
   const [formState, formAction] = useActionState(
     actions.auth.registerUser,
     INITIAL_STATE
-  );
+  )
 
   return (
     <Card>
@@ -125,5 +125,5 @@ export const SignUpForm = () => {
         </form>
       </CardContent>
     </Card>
-  );
-};
+  )
+}

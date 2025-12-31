@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer';
-import { Typography } from '../ui/typography';
-import Link from 'next/link';
-import { slugify } from '@/lib/utils';
-import Image from 'next/image';
-import ShikiHighlighter from 'react-shiki/web';
+import React from 'react'
+import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer'
+import { Typography } from '../ui/typography'
+import Link from 'next/link'
+import { slugify } from '@/lib/utils'
+import Image from 'next/image'
+import ShikiHighlighter from 'react-shiki/web'
 
 export const BlockRendererClient = ({
   content,
 }: {
-  readonly content: BlocksContent;
+  readonly content: BlocksContent
 }) => {
-  if (!content) return null;
+  if (!content) return null
 
   return (
     <BlocksRenderer
@@ -22,9 +22,9 @@ export const BlockRendererClient = ({
         heading: ({ children, level }) => {
           // 👀
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const childrenArray = React.Children.toArray(children) as any[];
-          const textContent = childrenArray[0]?.props?.text || '';
-          const headingId = slugify(textContent);
+          const childrenArray = React.Children.toArray(children) as any[]
+          const textContent = childrenArray[0]?.props?.text || ''
+          const headingId = slugify(textContent)
 
           switch (level) {
             case 1:
@@ -32,43 +32,43 @@ export const BlockRendererClient = ({
                 <Typography variant="h1" id={headingId}>
                   {children}
                 </Typography>
-              );
+              )
             case 2:
               return (
                 <Typography variant="h2" id={headingId}>
                   {children}
                 </Typography>
-              );
+              )
             case 3:
               return (
                 <Typography variant="h3" id={headingId}>
                   {children}
                 </Typography>
-              );
+              )
             case 4:
               return (
                 <Typography variant="h4" id={headingId}>
                   {children}
                 </Typography>
-              );
+              )
             case 5:
               return (
                 <Typography variant="h5" id={headingId}>
                   {children}
                 </Typography>
-              );
+              )
             case 6:
               return (
                 <Typography variant="h6" id={headingId}>
                   {children}
                 </Typography>
-              );
+              )
             default:
               return (
                 <Typography variant="h1" id={headingId}>
                   {children}
                 </Typography>
-              );
+              )
           }
         },
         paragraph: ({ children }) => (
@@ -92,7 +92,7 @@ export const BlockRendererClient = ({
             >
               {plainText?.trim() as string}
             </ShikiHighlighter>
-          );
+          )
         },
         image: ({ image }) => (
           <Image
@@ -115,8 +115,8 @@ export const BlockRendererClient = ({
         ),
         list: ({ children, format }) => {
           if (format === 'unordered')
-            return <ul className="list-disc list-inside">{children}</ul>;
-          return <ol className="list-decimal list-inside">{children}</ol>;
+            return <ul className="list-disc list-inside">{children}</ul>
+          return <ol className="list-decimal list-inside">{children}</ol>
         },
         'list-item': ({ children }) => <li>{children}</li>,
       }}
@@ -134,5 +134,5 @@ export const BlockRendererClient = ({
         ),
       }}
     />
-  );
-};
+  )
+}

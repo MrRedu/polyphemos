@@ -2,7 +2,7 @@ export const QUERY_HOME_PAGE = {
   populate: {
     fields: ['title', 'description'],
   },
-};
+}
 
 export const QUERY_ARTICLES = {
   populate: {
@@ -16,7 +16,7 @@ export const QUERY_ARTICLES = {
   //   page: 1,
   //   pageSize: 13,
   // },
-};
+}
 
 export const QUERY_ARTICLE_BY_ID = {
   populate: {
@@ -34,4 +34,4 @@ export const QUERY_ARTICLE_BY_ID = {
       // fields: ['*'],
     },
   },
-};
+}

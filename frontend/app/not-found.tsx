@@ -1,13 +1,13 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 import {
   Empty,
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyTitle,
-} from '@/components/ui/empty';
-import { SearchIcon } from 'lucide-react';
-import Link from 'next/link';
+} from '@/components/ui/empty'
+import { SearchIcon } from 'lucide-react'
+import Link from 'next/link'
 
 export default function NotFoundPage() {
   return (
@@ -33,5 +33,5 @@ export default function NotFoundPage() {
         </EmptyContent>
       </Empty>
     </section>
-  );
+  )
 }

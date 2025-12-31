@@ -1,9 +1,9 @@
-import { getArticles } from '@/lib/strapi';
-import { Article } from '@/types/types';
-import Link from 'next/link';
+import { getArticles } from '@/lib/strapi'
+import { Article } from '@/types/types'
+import Link from 'next/link'
 
 export default async function ArticlesPage() {
-  const { articles, meta } = await getArticles({});
+  const { articles, meta } = await getArticles({})
 
   return (
     <>
@@ -21,5 +21,5 @@ export default async function ArticlesPage() {
         {JSON.stringify(articles, null, 2)}
       </pre> */}
     </>
-  );
+  )
 }

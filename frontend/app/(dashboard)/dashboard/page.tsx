@@ -1,12 +1,12 @@
-'use client';
-import { DASHBOARD_OPTIONS } from '@/lib/constants';
-import Link from 'next/link';
+'use client'
+import { DASHBOARD_OPTIONS } from '@/lib/constants'
+import Link from 'next/link'
 
 export default function DashboardPage() {
   return (
     <div className="rounded shadow-xs bg-background w-full mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 p-8 h-full w-full gap-4">
-        {DASHBOARD_OPTIONS.map((option) => (
+        {DASHBOARD_OPTIONS.map(option => (
           <Link
             href={option.url}
             key={option.name}
@@ -17,5 +17,5 @@ export default function DashboardPage() {
         ))}
       </div>
     </div>
-  );
+  )
 }

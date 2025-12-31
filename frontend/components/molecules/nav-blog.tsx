@@ -71,7 +71,7 @@ export const NavBlog = ({
             <Input
               name="search"
               className="peer h-8 ps-8 pe-10 rounded-full bg-white"
-              placeholder={'Search...'}
+              placeholder={'Buscar...'}
               type="search"
               onClick={() => setOpen(true)}
             />
@@ -85,10 +85,10 @@ export const NavBlog = ({
         </div>
       </nav>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Search..." />
+        <CommandInput placeholder="Buscar" />
         <CommandList>
           <CommandEmpty>Sin resultados.</CommandEmpty>
-          <CommandGroup heading="Navigation">
+          <CommandGroup heading="Artículos disponibles">
             {availableArticleTitles.map((article) => (
               <CommandItem key={article.slug}>
                 <Link

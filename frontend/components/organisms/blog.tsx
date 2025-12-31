@@ -74,28 +74,32 @@ export const Blog = ({
             />
           ))}
         </AnimatedGroup>
-        <Separator className="my-4" />
-        <AnimatedGroup
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 "
-          preset="blur-slide"
-        >
-          {articles.slice(4).map((article, index) => (
-            <CardArticle
-              key={`${article.slug}-${index}`}
-              slug={article.slug}
-              title={article.title}
-              summary={article.summary}
-              author={article.author}
-              published={article.published}
-              imageUrl={
-                ENVIRONMENT === 'development'
-                  ? `${API_BASE_URL}${article.cover?.url || ''}`
-                  : article.cover?.url
-              }
-              isSecondary
-            />
-          ))}
-        </AnimatedGroup>
+        {articles.length > 4 && (
+          <>
+            <Separator className="my-4" />
+            <AnimatedGroup
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 "
+              preset="blur-slide"
+            >
+              {articles.slice(4).map((article, index) => (
+                <CardArticle
+                  key={`${article.slug}-${index}`}
+                  slug={article.slug}
+                  title={article.title}
+                  summary={article.summary}
+                  author={article.author}
+                  published={article.published}
+                  imageUrl={
+                    ENVIRONMENT === 'development'
+                      ? `${API_BASE_URL}${article.cover?.url || ''}`
+                      : article.cover?.url
+                  }
+                  isSecondary
+                />
+              ))}
+            </AnimatedGroup>
+          </>
+        )}
         {hasMore && (
           <div className="flex items-center justify-center mt-16">
             <Button

@@ -1,5 +1,5 @@
-import type { NextConfig } from 'next';
-import { API_MEDIA_BASE_URL } from './lib/constants';
+import type { NextConfig } from 'next'
+import { API_MEDIA_BASE_URL } from './lib/constants'
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -17,6 +17,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

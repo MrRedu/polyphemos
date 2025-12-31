@@ -1,5 +1,5 @@
-'use client';
-import { useState, useEffect } from 'react';
+'use client'
+import { useState, useEffect } from 'react'
 import {
   CommandDialog,
   CommandEmpty,
@@ -7,36 +7,36 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
+} from '@/components/ui/command'
 
-import { MoveRight, SearchIcon } from 'lucide-react';
-import { Input } from '../ui/input';
-import { Kbd } from '../ui/kbd';
-import Link from 'next/link';
-import { Label } from '@/types/types';
-import { cn } from '@/lib/utils';
-import { NAV_LABELS } from '@/lib/constants';
+import { MoveRight, SearchIcon } from 'lucide-react'
+import { Input } from '../ui/input'
+import { Kbd } from '../ui/kbd'
+import Link from 'next/link'
+import { Label } from '@/types/types'
+import { cn } from '@/lib/utils'
+import { NAV_LABELS } from '@/lib/constants'
 
 interface NavBlogProps {
-  availableArticleTitles: { title: string; slug: string }[];
-  activeLabel: Label;
+  availableArticleTitles: { title: string; slug: string }[]
+  activeLabel: Label
 }
 
 export const NavBlog = ({
   availableArticleTitles,
   activeLabel,
 }: NavBlogProps) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen((open) => !open);
+        e.preventDefault()
+        setOpen(open => !open)
       }
-    };
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
-  }, []);
+    }
+    document.addEventListener('keydown', down)
+    return () => document.removeEventListener('keydown', down)
+  }, [])
 
   return (
     <>
@@ -52,7 +52,7 @@ export const NavBlog = ({
               Todos
             </Link>
           </li>
-          {NAV_LABELS.map((label) => (
+          {NAV_LABELS.map(label => (
             <li key={label.label}>
               <Link
                 href={label.href}
@@ -89,7 +89,7 @@ export const NavBlog = ({
         <CommandList>
           <CommandEmpty>Sin resultados.</CommandEmpty>
           <CommandGroup heading="Artículos disponibles">
-            {availableArticleTitles.map((article) => (
+            {availableArticleTitles.map(article => (
               <CommandItem key={article.slug}>
                 <Link
                   href={`/blog/${article.slug}`}
@@ -105,5 +105,5 @@ export const NavBlog = ({
         </CommandList>
       </CommandDialog>
     </>
-  );
-};
+  )
+}

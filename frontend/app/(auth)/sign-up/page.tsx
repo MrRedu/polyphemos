@@ -1,6 +1,6 @@
-import { SignUpForm } from '@/components/organisms/sign-up-form';
-import { Typography } from '@/components/ui/typography';
-import Link from 'next/link';
+import { SignUpForm } from '@/components/organisms/sign-up-form'
+import { Typography } from '@/components/ui/typography'
+import Link from 'next/link'
 
 export default function SignUpPage() {
   return (
@@ -23,5 +23,5 @@ export default function SignUpPage() {
         </Link>
       </div>
     </section>
-  );
+  )
 }

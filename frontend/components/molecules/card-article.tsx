@@ -1,13 +1,15 @@
-import type { Article } from '@/types/types';
-import { cn, formatDate } from '@/lib/utils';
-import { MoveRight } from 'lucide-react';
-import Link from 'next/link';
-import StrapiImage from '../atoms/strapi-image';
+import type { Article } from '@/types/types'
+import { cn, formatDate } from '@/lib/utils'
+import { MoveRight } from 'lucide-react'
+import Link from 'next/link'
+import StrapiImage from '../atoms/strapi-image'
 
-interface CardArticleProps
-  extends Pick<Article, 'slug' | 'title' | 'summary' | 'author' | 'published'> {
-  imageUrl: Article['cover']['url'];
-  isSecondary?: boolean;
+interface CardArticleProps extends Pick<
+  Article,
+  'slug' | 'title' | 'summary' | 'author' | 'published'
+> {
+  imageUrl: Article['cover']['url']
+  isSecondary?: boolean
 }
 
 export const CardArticle = ({
@@ -58,5 +60,5 @@ export const CardArticle = ({
         )}
       </div>
     </Link>
-  );
-};
+  )
+}

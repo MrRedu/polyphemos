@@ -1,7 +1,7 @@
-import type { SVGProps } from 'react';
+import type { SVGProps } from 'react'
 
 interface IconProps extends SVGProps<SVGSVGElement> {
-  color?: string;
+  color?: string
 }
 
 export const PolyphemosIcon = ({
@@ -51,4 +51,4 @@ export const PolyphemosIcon = ({
       style={{ fill: color }}
     />
   </svg>
-);
+)

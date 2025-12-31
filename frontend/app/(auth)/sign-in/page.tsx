@@ -1,6 +1,6 @@
-import { SignInForm } from '@/components/organisms/sign-in-form';
-import { Typography } from '@/components/ui/typography';
-import Link from 'next/link';
+import { SignInForm } from '@/components/organisms/sign-in-form'
+import { Typography } from '@/components/ui/typography'
+import Link from 'next/link'
 
 export default function SignInPage() {
   return (
@@ -23,5 +23,5 @@ export default function SignInPage() {
         </Link>
       </div>
     </section>
-  );
+  )
 }

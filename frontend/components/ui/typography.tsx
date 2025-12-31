@@ -1,5 +1,5 @@
-import { cva } from 'class-variance-authority';
-import { type JSX } from 'react';
+import { cva } from 'class-variance-authority'
+import { type JSX } from 'react'
 
 const typographyVariants = cva('', {
   variants: {
@@ -22,7 +22,7 @@ const typographyVariants = cva('', {
   defaultVariants: {
     variant: 'p',
   },
-});
+})
 
 type POSSIBLE_VARIANTS =
   | 'h1'
@@ -37,13 +37,13 @@ type POSSIBLE_VARIANTS =
   | 'lead'
   | 'large'
   | 'small'
-  | 'muted';
+  | 'muted'
 
 interface TypographyProps {
-  variant?: POSSIBLE_VARIANTS;
-  className?: string;
-  id?: string;
-  children: React.ReactNode;
+  variant?: POSSIBLE_VARIANTS
+  className?: string
+  id?: string
+  children: React.ReactNode
 }
 
 const tagMap: Record<POSSIBLE_VARIANTS, keyof JSX.IntrinsicElements> = {
@@ -60,7 +60,7 @@ const tagMap: Record<POSSIBLE_VARIANTS, keyof JSX.IntrinsicElements> = {
   large: 'p',
   small: 'small',
   muted: 'p',
-};
+}
 
 export const Typography = ({
   variant = 'p',
@@ -69,7 +69,7 @@ export const Typography = ({
   id,
   ...props
 }: TypographyProps) => {
-  const Tag = tagMap[variant] || 'p';
+  const Tag = tagMap[variant] || 'p'
 
   return (
     <Tag
@@ -80,5 +80,5 @@ export const Typography = ({
     >
       {children}
     </Tag>
-  );
-};
+  )
+}

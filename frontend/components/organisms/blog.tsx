@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import type { Article, Label, MetaResponse } from '@/types/types';
-import { cn } from '@/lib/utils';
-import { NavBlog } from '@/components/molecules/nav-blog';
-import { CardArticle } from '@/components/molecules/card-article';
-import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/ui/button';
-import { AnimatedGroup } from '@/components/ui/animated-group';
-import { useBlog } from '@/hooks/use-blog';
+import type { Article, Label, MetaResponse } from '@/types/types'
+import { cn } from '@/lib/utils'
+import { NavBlog } from '@/components/molecules/nav-blog'
+import { CardArticle } from '@/components/molecules/card-article'
+import { Separator } from '@/components/ui/separator'
+import { Button } from '@/components/ui/button'
+import { AnimatedGroup } from '@/components/ui/animated-group'
+import { useBlog } from '@/hooks/use-blog'
 
 interface BlogProps {
-  initialArticles: Article[];
-  initialMeta: MetaResponse;
-  currentLabel: Label;
-  className?: string;
+  initialArticles: Article[]
+  initialMeta: MetaResponse
+  currentLabel: Label
+  className?: string
 }
 
 export const Blog = ({
@@ -29,7 +29,7 @@ export const Blog = ({
     handleLoadMore,
     availableArticleTitles,
     hasMore,
-  } = useBlog({ initialArticles, initialMeta, currentLabel });
+  } = useBlog({ initialArticles, initialMeta, currentLabel })
 
   return (
     <section className={cn('py-32 px-2', className)}>
@@ -90,5 +90,5 @@ export const Blog = ({
         )}
       </div>
     </section>
-  );
-};
+  )
+}

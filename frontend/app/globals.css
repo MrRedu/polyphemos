@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -10,7 +10,6 @@
   --font-sans: 'Inter', sans-serif;
   --font-serif: 'Inter', sans-serif;
   --font-mono: 'Inter', sans-serif;
-
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);

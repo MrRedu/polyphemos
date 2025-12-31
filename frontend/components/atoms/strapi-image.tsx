@@ -1,12 +1,12 @@
-import { cn, getStrapiMedia } from '@/lib/utils';
-import Image from 'next/image';
+import { cn, getStrapiMedia } from '@/lib/utils'
+import Image from 'next/image'
 
 interface StrapiImageProps {
-  src: string;
-  alt: string;
-  width?: number;
-  height?: number;
-  className?: string;
+  src: string
+  alt: string
+  width?: number
+  height?: number
+  className?: string
 }
 
 export default function StrapiImage({
@@ -17,7 +17,7 @@ export default function StrapiImage({
   className,
   ...props
 }: StrapiImageProps) {
-  const imageUrl = getStrapiMedia(src);
+  const imageUrl = getStrapiMedia(src)
 
   return (
     <Image
@@ -28,5 +28,5 @@ export default function StrapiImage({
       className={cn('w-full h-full min-h-full object-cover', className)}
       {...props}
     />
-  );
+  )
 }

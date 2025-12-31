@@ -1,9 +1,9 @@
 interface FormErrorProps {
-  error?: string[];
+  error?: string[]
 }
 
 export const FormError = ({ error }: FormErrorProps) => {
-  if (!error) return null;
+  if (!error) return null
 
   return (
     <>
@@ -13,5 +13,5 @@ export const FormError = ({ error }: FormErrorProps) => {
         </div>
       ))}
     </>
-  );
-};
+  )
+}

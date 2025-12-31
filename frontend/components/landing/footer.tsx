@@ -1,6 +1,6 @@
-import { FOOTER_LINKS } from '@/lib/constants';
-import { ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+import { FOOTER_LINKS } from '@/lib/constants'
+import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 
 export const Footer = () => {
   return (
@@ -59,5 +59,5 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}

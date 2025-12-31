@@ -1,9 +1,9 @@
-const { env } = process;
+const { env } = process
 
-export const ENVIRONMENT = env.NODE_ENV;
-export const API_BASE_URL = env.API_BASE_URL || 'http://localhost:1337';
+export const ENVIRONMENT = env.NODE_ENV
+export const API_BASE_URL = env.API_BASE_URL || 'http://localhost:1337'
 export const API_MEDIA_BASE_URL =
-  env.API_MEDIA_BASE_URL || 'http://localhost:1337';
+  env.API_MEDIA_BASE_URL || 'http://localhost:1337'
 
 export const FOOTER_LINKS = [
   {
@@ -27,7 +27,7 @@ export const FOOTER_LINKS = [
     label: 'Políticas de privacidad',
     href: '#',
   },
-];
+]
 
 export const NAV_LABELS = [
   {
@@ -42,7 +42,7 @@ export const NAV_LABELS = [
     label: 'IA',
     href: '?label=IA',
   },
-];
+]
 
 export const DASHBOARD_OPTIONS = [
   {
@@ -61,4 +61,4 @@ export const DASHBOARD_OPTIONS = [
     name: 'Otro',
     url: '/dashboard/otro',
   },
-];
+]

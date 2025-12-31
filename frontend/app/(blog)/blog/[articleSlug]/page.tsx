@@ -1,25 +1,25 @@
-import { NavArticle } from '@/components/molecules/nav-article';
-import { BlockRendererClient } from '@/components/organisms/block-renderer-client';
-import { getArticleById } from '@/lib/strapi';
+import { NavArticle } from '@/components/molecules/nav-article'
+import { BlockRendererClient } from '@/components/organisms/block-renderer-client'
+import { getArticleById } from '@/lib/strapi'
 import {
   calculateReadingMinutes,
   formatDate,
   getStrapiMedia,
   pluralizeWord,
-} from '@/lib/utils';
-import { Article } from '@/types/types';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
+} from '@/lib/utils'
+import { Article } from '@/types/types'
+import { notFound } from 'next/navigation'
+import Link from 'next/link'
 
 interface ArticlePageProps {
   params: {
-    articleSlug: string;
-  };
+    articleSlug: string
+  }
 }
 
 export async function generateMetadata({ params }: ArticlePageProps) {
-  const { articleSlug } = await params;
-  const article = await getArticleById(articleSlug);
+  const { articleSlug } = await params
+  const article = await getArticleById(articleSlug)
 
   return {
     title: article.title,
@@ -44,16 +44,16 @@ export async function generateMetadata({ params }: ArticlePageProps) {
       siteName: 'Polyphemos',
       type: 'website',
     },
-  };
+  }
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const { articleSlug } = await params;
-  const article: Article = await getArticleById(articleSlug);
-  const imageUrl = getStrapiMedia(article.cover?.url || '');
-  const readingMinutes = calculateReadingMinutes(article.content);
+  const { articleSlug } = await params
+  const article: Article = await getArticleById(articleSlug)
+  const imageUrl = getStrapiMedia(article.cover?.url || '')
+  const readingMinutes = calculateReadingMinutes(article.content)
 
-  if (!article) return notFound();
+  if (!article) return notFound()
 
   return (
     <div className="my-auto flex w-full justify-center">
@@ -130,5 +130,5 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </section>
     </div>
-  );
+  )
 }

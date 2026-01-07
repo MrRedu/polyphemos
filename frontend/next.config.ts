@@ -10,10 +10,14 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: API_MEDIA_BASE_URL,
+        port: '',
+        pathname: '/**',
       },
       {
         protocol: 'http',
         hostname: 'localhost',
+        port: '1337',
+        pathname: '/**',
       },
     ],
   },

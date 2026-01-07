@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: API_MEDIA_BASE_URL,
+        hostname: new URL(API_MEDIA_BASE_URL).hostname,
         port: '',
         pathname: '/**',
       },

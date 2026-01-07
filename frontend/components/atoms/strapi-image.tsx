@@ -25,7 +25,10 @@ export default function StrapiImage({
       alt={alt || 'Imagen'}
       width={width || 800}
       height={height || 450}
-      className={cn('w-full h-full min-h-full object-cover', className)}
+      className={cn(
+        'w-full h-full min-h-full object-cover bg-background/50',
+        className
+      )}
       {...props}
     />
   )
